@@ -732,6 +732,12 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
         }}"
                   class="table-row ${this.editMode && this.selectedRow === item ? "edit" : ""} ${this.selectedRow === item ? "selected" : ""}"
                 >
+					<td>
+	 					<span class="table-cell-value"
+                              check</span
+	 				</td>
+
+   
                   ${this.columns.map(column => y`
                       <td>
                         ${this.editMode && this.selectedRow === item ? y`<input
