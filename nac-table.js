@@ -735,7 +735,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
    
                   ${this.columns.map((column, columnIndex) => y`
                       <td>
-                        ${columnIndex === 0 ? y`<input
+                        ${this.selectedRow === item && columnIndex === 0 ? y`<input
                               type="checkbox"
                               .checked="${item[column.field]}"
                               class="table-cell-input input-styled"
@@ -760,7 +760,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           }
         }}"
                               ?disabled=${!!this.readonly}
-                            />` : y`<span class=${this.editMode && this.selectedRow === item ? "table-cell-value-edit" : ""}"table-cell-value"
+                            />` : y`<span class=${this.editMode && this.selectedRow === item ? "table-cell-value-edit" : "table-cell-value"}
                               >${item[column.field]}</span
                             >`}
                       </td>
