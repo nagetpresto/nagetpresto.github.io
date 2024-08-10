@@ -733,9 +733,35 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
                   class="table-row ${this.editMode && this.selectedRow === item ? "edit" : ""} ${this.selectedRow === item ? "selected" : ""}"
                 >
 					<td>
-	 					<span class="table-cell-value"
-                              check</span>
-	 				</td>
+                        ${this.editMode && this.selectedRow === item ? y`<input
+                              type="text"
+                              .value="${item[column.field]}"
+                              class="table-cell-input input-styled"
+                              @input="${event => this.onCellEdit({
+          field: column.field,
+          value: event.target.value
+        })}"
+                              @focus="${() => {
+          this.editCell = {
+            columnName: column.field,
+            row: item
+          };
+          this.requestUpdate();
+        }}"
+                              @blur="${() => {
+          if (this.editCell?.row === item) {
+            this.editCell = {
+              columnName: column.field,
+              row: item
+            };
+            this.requestUpdate();
+          }
+        }}"
+                              ?disabled=${!!this.readonly}
+                            />` : y`<span class="table-cell-value"
+                              >${item[column.field]}</span
+                            >`}
+                      </td>
 
    
                   ${this.columns.map(column => y`
