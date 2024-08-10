@@ -11,6 +11,7 @@ const NacTableStyles = i`
 .table-wrapper {
   border-radius: 4px;
   overflow: auto;
+  text-wrap: nowrap;
   border: 1px solid #ccc;
 }
 table {
