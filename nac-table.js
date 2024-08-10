@@ -608,15 +608,17 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           };
           editedRow[field] = value;
           this.tempEditRowData = editedRow;
-
-	  const editedRow2 = this.data.find(item => item === this.selectedRow);
-          Object.assign(editedRow2, this.tempEditRowData);
-	          this.dispatchEvent(new CustomEvent("change", {
-	            detail: {
-	              collection: JSON.stringify(this.data)
-	            }
-	          }));
-	        }
+	console.log(this.tempEditRowData,"test");
+	  const rowToSave = this.data.find(item => item === this.selectedRow);
+	  if (rowToSave) {
+		  Object.assign(rowToSave, this.tempEditRowData);
+		  this.dispatchEvent(new CustomEvent("change", {
+		      detail: {
+		        collection: JSON.stringify(this.data)
+		      }
+		}));
+  	}
+	}
       }
     }, {
       kind: "method",
