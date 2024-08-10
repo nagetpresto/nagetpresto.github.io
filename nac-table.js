@@ -10,7 +10,7 @@ const baseStyle = i`
 const NacTableStyles = i`
 .table-wrapper {
   border-radius: 4px;
-  overflow: hidden;
+  overflow: auto;
   border: 1px solid #ccc;
 }
 table {
