@@ -736,7 +736,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
                   ${this.columns.map((column, columnIndex) => y`
                       <td>
                         ${this.editMode && this.selectedRow === item && columnIndex === 0 ? y`<input
-                              type="text"
+                              type="checkbox"
                               .value="${item[column.field]}"
                               class="table-cell-input input-styled"
                               @input="${event => this.onCellEdit({
