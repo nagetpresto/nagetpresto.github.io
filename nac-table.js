@@ -608,7 +608,15 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           };
           editedRow[field] = value;
           this.tempEditRowData = editedRow;
-        }
+
+	  const editedRow2 = this.data.find(item => item === this.selectedRow);
+          Object.assign(editedRow2, this.tempEditRowData);
+	          this.dispatchEvent(new CustomEvent("change", {
+	            detail: {
+	              collection: JSON.stringify(this.data)
+	            }
+	          }));
+	        }
       }
     }, {
       kind: "method",
@@ -721,9 +729,10 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           if (this.editMode && this.selectedRow !== item) {
             this.unselect();
           }
-          if (this.selectedRow === item && !this.editMode) {
-            this.selectedRow = null;
-          } else {
+          //if (this.selectedRow === item && !this.editMode) {
+          //  this.selectedRow = null;
+          //} 
+	  else {
             this.selectedRow = item;
           }
           this.requestUpdate();
@@ -735,7 +744,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
    
                   ${this.columns.map((column, columnIndex) => y`
                       <td>
-                        ${this.selectedRow === item && columnIndex === 0 ? y`<input
+                        ${columnIndex === 0 ? y`<input
                               type="checkbox"
                               .checked="${item[column.field]}"
                               class="table-cell-input input-styled"
