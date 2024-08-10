@@ -537,6 +537,9 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
         if (changedProps.has("collection")) {
           try {
             this.data = JSON.parse(this.collection);
+	    this.data = this.data.map(row => {
+	        return {Action: false, ...row };
+	      });
             this.updatePageData();
           } catch (e) {
             console.error("Error parsing table data: ", e);
