@@ -680,11 +680,6 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
         <table>
           <thead>
             <tr>
-              <th>
-                <span class="flex-item">
-                  Checkbox
-                </span>
-              </th>
               ${this.columns.map(column => y`
                   <th @click="${() => this.onSortClick(column.field)}">
                     ${y`<span class="flex-item">
