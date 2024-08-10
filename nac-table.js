@@ -737,9 +737,9 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
                       <td>
                         ${this.editMode && this.selectedRow === item && columnIndex === 0 ? y`<input
                               type="checkbox"
-                              .value="${item[column.field]}"
+                              .checked="${item[column.field]}"
                               class="table-cell-input input-styled"
-                              @input="${event => this.onCellEdit({
+                              @change="${event => this.onCellEdit({
           field: column.field,
           value: event.target.value
         })}"
@@ -760,7 +760,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           }
         }}"
                               ?disabled=${!!this.readonly}
-                            />` : y`<span class="table-cell-value"
+                            />` : y`<span class=${this.editMode && this.selectedRow === item ? "table-cell-value-edit" : ""}"table-cell-value"
                               >${item[column.field]}</span
                             >`}
                       </td>
