@@ -734,7 +734,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
                 >
 					<td>
 	 					<span class="table-cell-value"
-                              check</span
+                              check</span>
 	 				</td>
 
    
