@@ -619,14 +619,14 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	  console.log(this.tempEditRowData,"tempEdit");
 	  console.log(this.isnew,"isnew");
 		
-	  const previousAction = this.selectedRow?.Action;
+	  const previousAction = this.selectedRow ? this.selectedRow["Action"] : null;
 	  const rowToSave = this.data.find(item => item === this.selectedRow);
 	  if (rowToSave) {
-		  const actionChanged = this.tempEditRowData.Action !== previousAction;
-    		  const amount = parseFloat(this.tempEditRowData.Amount) || 0;
+		  const actionChanged = this.tempEditRowData["Action"] !== previousAction;
+    		  const amount = parseFloat(this.tempEditRowData["Amount in document"]) || 0;
 
 		  if (actionChanged) {
-		      if (this.tempEditRowData.Action) {
+		      if (this.tempEditRowData["Action"]) {
 		        this.totalAmount += amount;
 		      } else {
 		        this.totalAmount -= amount;
