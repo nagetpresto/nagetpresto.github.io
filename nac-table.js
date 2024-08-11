@@ -312,7 +312,7 @@ _decorate([e$1("lit-toolbar")], function (_initialize, _LitElement) {
         </button>
         <button
           @click="${() => this.dispatchEvent(new CustomEvent("edit-row"))}"
-          ?disabled="${!this.hasSelectedRow}"
+          ?disabled="${!this.hasSelectedRow && !this.isnew}"
         >
           <svg
             height="18px"
@@ -774,7 +774,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             this.requestUpdate();
           }
         }}"
-                              ?disabled=${this.isnew}
+                              ?disabled=${!this.isnew}
                             />` : y`<span class=${this.editMode && this.selectedRow === item ? "table-cell-value-edit" : "table-cell-value"}
                               >${item[column.field]}</span
                             >`}
