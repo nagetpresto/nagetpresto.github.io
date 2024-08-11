@@ -90,6 +90,7 @@ th {
 
 .flex-item {
   display: flex;
+  justify-content: center;
 }
 
 .top-panel {
