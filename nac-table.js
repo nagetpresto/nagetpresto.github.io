@@ -536,7 +536,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       value: function updated(changedProps) {
         if (changedProps.has("collection")) {
           try {
-	    const [isnewString, collectionString] = this.collection.split(';')
+	    const [isnewString, collectionString] = this.collection.split(';');
 	    this.isnew = JSON.parse(isnewString);
             this.data = JSON.parse(collectionString);
 	    this.data = this.data.map(row => {
@@ -612,6 +612,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           editedRow[field] = value;
           this.tempEditRowData = editedRow;
 	console.log(this.tempEditRowData,"test");
+		console.log(this.isnew,"isnew");
 	  const rowToSave = this.data.find(item => item === this.selectedRow);
 	  if (rowToSave) {
 		  Object.assign(rowToSave, this.tempEditRowData);
