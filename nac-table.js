@@ -615,7 +615,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           };
           editedRow[field] = value;
           this.tempEditRowData = editedRow;
-	  console.log(this.selectedRow,"selectedRow");
+	  console.log(this.editcell.row,"editcellrow");
 	  console.log(this.tempEditRowData,"tempEdit");
 	  console.log(this.isnew,"isnew");
 		
