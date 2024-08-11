@@ -607,13 +607,13 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
         field,
         value
       }) {
-  	console.log(this.selectedRow,"selectedRow");
-	console.log(this.editCell,"editCell")
-	console.log(this.tempEditRowData,"tmp edit")
+  	//console.log(this.selectedRow,"selectedRow");
+	//console.log(this.editCell,"editCell")
+	//console.log(this.tempEditRowData,"tmp edit")
+	      
         if (this.editCell) {
           const found = this.pageData.find(item => item === this.editCell?.row);
-	  console.log(found,"found");
-	  
+	  //console.log(found,"found");	  
           if (!found) return;
           const editedRow = {
             ...found
@@ -621,11 +621,11 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           editedRow[field] = value;
           this.tempEditRowData = editedRow;
 		
-	  console.log(this.selectedRow,"selectedRow");
-	  console.log(this.tempEditRowData,"tempEdit");
+	  console.log(found["row"],"selected");	
+	  console.log(this.tempEditRowData,"edited");
 	  console.log(this.isnew,"isnew");
 		
-	  const previousAction = this.selectedRow["Action"];
+	  const previousAction = this.editCell?.row["Action"];
 	  const rowToSave = this.data.find(item => item === this.selectedRow);
 	  if (rowToSave) {
 		  const actionChanged = this.tempEditRowData["Action"] !== previousAction;
