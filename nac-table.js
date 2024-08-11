@@ -625,13 +625,11 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	  console.log(this.tempEditRowData,"edited");
 	  console.log(this.isnew,"isnew");
 		
-	  const previousAction = this.editCell?.row["Action"];
-	  const rowToSave = this.data.find(item => item === this.selectedRow);
-	  if (rowToSave) {
+	  const previousAction = found.row["Action"];
+	  //const rowToSave = this.data.find(item => item === this.selectedRow);
+	  //if (rowToSave) {
 		  const actionChanged = this.tempEditRowData["Action"] !== previousAction;
     		  const amount = parseFloat(this.tempEditRowData["Amount in document"]) || 0;
-		  console.log(amount,"tes amount")
-		  console.log(actionChanged)
 		  
 		  if (actionChanged) {
 		      if (this.tempEditRowData["Action"]) {
@@ -643,13 +641,13 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 
 		  console.log(this.totalAmount, "totalAmount");
 		  
-		  //Object.assign(rowToSave, this.tempEditRowData);
-		  //this.dispatchEvent(new CustomEvent("change", {
-		//   detail: {
-		//        collection: JSON.stringify(this.data)
-		//      }
-		//}));
-  	}
+		  Object.assign(found.row, this.tempEditRowData);
+		  this.dispatchEvent(new CustomEvent("change", {
+		   detail: {
+		        collection: JSON.stringify(this.data)
+		      }
+		}));
+  	//}
 	}
       }
     }, {
