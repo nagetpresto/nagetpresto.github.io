@@ -623,7 +623,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	  const rowToSave = this.data.find(item => item === this.selectedRow);
 	  if (rowToSave) {
 		  const actionChanged = this.tempEditRowData["Action"] !== previousAction;
-    		  const amount = parseFloat(this.tempEditRowData["Amount in document"]) || 0;
+    		  const amount = parseFloat(this.tempEditRowData["Amount in Document"]) || 0;
 
 		  if (actionChanged) {
 		      if (this.tempEditRowData["Action"]) {
@@ -809,7 +809,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 
       <div class="total-amount" style="display: flex;justify-content: right;padding: 10px;column-gap: 10px;height: 30px;">
     	<label>Total Amount (IDR): </label>
-	<input type="text" value="${this.totalAmount}" class="input-styled" id="totalAmount" readonly="true" style="background: #f7f7f7;">
+	<input type="text" .value="${this.totalAmount}" class="input-styled" id="totalAmount" readonly="true" style="background: #f7f7f7;">
       </div>
       
     `;
