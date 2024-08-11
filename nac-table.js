@@ -613,7 +613,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	      
         if (this.editCell) {
           const found = this.pageData.find(item => item === this.editCell?.row);
-	  //console.log(found,"found");	  
+	  console.log(found,"found");	  
           if (!found) return;
           const editedRow = {
             ...found
@@ -626,8 +626,8 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	  console.log(this.isnew,"isnew");
 		
 	  const previousAction = found["Action"];
-	  //const rowToSave = this.data.find(item => item === this.selectedRow);
-	  //if (rowToSave) {
+	  const rowToSave = this.data.find(item => item === found);
+	  if (rowToSave) {
 		  const actionChanged = this.tempEditRowData["Action"] !== previousAction;
     		  const amount = parseFloat(this.tempEditRowData["Amount in document"]) || 0;
 		  
@@ -641,13 +641,13 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 
 		  console.log(this.totalAmount, "totalAmount");
 		  
-		  Object.assign(found, this.tempEditRowData);
+		  Object.assign(rowToSave, this.tempEditRowData);
 		  this.dispatchEvent(new CustomEvent("change", {
 		   detail: {
 		        collection: JSON.stringify(this.data)
 		      }
 		}));
-  	//}
+  	}
 	}
       }
     }, {
