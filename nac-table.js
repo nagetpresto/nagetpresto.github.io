@@ -611,7 +611,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	console.log(this.editCell,"editCell")
 	console.log(this.tempEditRowData,"tmp edit")
         if (this.editCell) {
-          const found = this.tempEditRowData || this.pageData.find(item => item === this.editCell?.row);
+          const found = this.pageData.find(item => item === this.editCell?.row);
 	  console.log(found,"found");
 	  
           if (!found) return;
