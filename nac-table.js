@@ -28,7 +28,7 @@ th,
 td {
   padding: 0 0.5rem;
   border-top: 1px solid #ccc;
-  text-align: left;
+  text-align: center;
   vertical-align: middle;
   position: relative;
 }
@@ -774,7 +774,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             this.requestUpdate();
           }
         }}"
-                              ?disabled=${!!this.readonly}
+                              ?disabled=${this.isnew}
                             />` : y`<span class=${this.editMode && this.selectedRow === item ? "table-cell-value-edit" : "table-cell-value"}
                               >${item[column.field]}</span
                             >`}
