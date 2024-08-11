@@ -536,12 +536,13 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       value: function updated(changedProps) {
         if (changedProps.has("collection")) {
           try {
-	    const [isnewString, collectionString] = collection.split(';')
+	    const [isnewString, collectionString] = this.collection.split(';')
 	    this.isnew = JSON.parse(isnewString);
             this.data = JSON.parse(collectionString);
 	    this.data = this.data.map(row => {
 	        return {Action: false, ...row };
 	      });
+	    console.log(this.isnew,"isnew");
             this.updatePageData();
           } catch (e) {
             console.error("Error parsing table data: ", e);
