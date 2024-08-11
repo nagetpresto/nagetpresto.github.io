@@ -621,11 +621,11 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           editedRow[field] = value;
           this.tempEditRowData = editedRow;
 		
-	  console.log(found.row,"selected row");	
+	  console.log(found,"selectedrow");	
 	  console.log(this.tempEditRowData,"edited");
 	  console.log(this.isnew,"isnew");
 		
-	  const previousAction = found.row["Action"];
+	  const previousAction = found["Action"];
 	  //const rowToSave = this.data.find(item => item === this.selectedRow);
 	  //if (rowToSave) {
 		  const actionChanged = this.tempEditRowData["Action"] !== previousAction;
@@ -641,7 +641,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 
 		  console.log(this.totalAmount, "totalAmount");
 		  
-		  Object.assign(found.row, this.tempEditRowData);
+		  Object.assign(found, this.tempEditRowData);
 		  this.dispatchEvent(new CustomEvent("change", {
 		   detail: {
 		        collection: JSON.stringify(this.data)
