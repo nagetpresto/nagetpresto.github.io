@@ -539,6 +539,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           try {
 	    const [isnewString,exrateUSD,exrateJPY, collectionString] = this.collection.split(';');
 	    this.isnew = JSON.parse(isnewString);
+	    this.totalAmount = 0;
 	    this.USD = JSON.parse(exrateUSD);
 	    this.JPY = JSON.parse(exrateJPY);
             this.data = JSON.parse(collectionString);
@@ -614,10 +615,23 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           };
           editedRow[field] = value;
           this.tempEditRowData = editedRow;
-	console.log(this.tempEditRowData,"test");
-		console.log(this.isnew,"isnew");
+	  console.log(this.tempEditRowData,"test");
+	  console.log(this.isnew,"isnew");
+		
+	  const previousAction = this.selectedRow?.Action;
 	  const rowToSave = this.data.find(item => item === this.selectedRow);
 	  if (rowToSave) {
+		  const actionChanged = this.tempEditRowData.Action !== previousAction;
+    		  const amount = parseFloat(this.tempEditRowData.Amount) || 0;
+
+		  if (actionChanged) {
+		      if (this.tempEditRowData.Action) {
+		        this.totalAmount += amount;
+		      } else {
+		        this.totalAmount -= amount;
+		      }
+		    }
+		  
 		  Object.assign(rowToSave, this.tempEditRowData);
 		  this.dispatchEvent(new CustomEvent("change", {
 		      detail: {
@@ -793,7 +807,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 
       <div class="total-amount" style="display: flex;justify-content: right;padding: 10px;column-gap: 10px;height: 30px;">
     	<label>Total Amount (IDR): </label>
-	<input type="text" class="input-styled" id="totalAmount" readonly="true" style="background: #f7f7f7;">
+	<input type="text" value="${this.totalAmount}" class="input-styled" id="totalAmount" readonly="true" style="background: #f7f7f7;">
       </div>
       
     `;
