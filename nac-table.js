@@ -754,12 +754,12 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
                 <tr
                   @click="${() => {
           if (this.readonly) return;
-          if (this.selectedRow !== item) {
+          if (this.editMode && this.selectedRow !== item) {
             this.unselect();
           }
-          //if (this.selectedRow === item && !this.editMode) {
-          //  this.selectedRow = null;
-          //} 
+          if (this.selectedRow === item && !this.editMode) {
+            this.selectedRow = null;
+          } 
 	  else {          
             this.selectedRow = item;
           }
