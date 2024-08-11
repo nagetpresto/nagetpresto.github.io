@@ -607,17 +607,21 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
         field,
         value
       }) {
+  	console.log(this.selectedRow,"selectedRow");
+	console.log(this.editCell,"editCell")
+	console.log(this.tempEditRowData,"tmp edit")
         if (this.editCell) {
           const found = this.tempEditRowData || this.pageData.find(item => item === this.editCell?.row);
 	  console.log(found,"found");
-	  console.log(this.selectedRow,"selectedRow");
+	  
           if (!found) return;
           const editedRow = {
             ...found
           };
           editedRow[field] = value;
           this.tempEditRowData = editedRow;
-	
+		
+	  console.log(this.selectedRow,"selectedRow");
 	  console.log(this.tempEditRowData,"tempEdit");
 	  console.log(this.isnew,"isnew");
 		
