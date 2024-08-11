@@ -643,12 +643,12 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 
 		  console.log(this.totalAmount, "totalAmount");
 		  
-		  Object.assign(rowToSave, this.tempEditRowData);
-		  this.dispatchEvent(new CustomEvent("change", {
-		      detail: {
-		        collection: JSON.stringify(this.data)
-		      }
-		}));
+		  //Object.assign(rowToSave, this.tempEditRowData);
+		  //this.dispatchEvent(new CustomEvent("change", {
+		//   detail: {
+		//        collection: JSON.stringify(this.data)
+		//      }
+		//}));
   	}
 	}
       }
