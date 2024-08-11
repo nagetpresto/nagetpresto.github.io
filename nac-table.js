@@ -615,7 +615,8 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           };
           editedRow[field] = value;
           this.tempEditRowData = editedRow;
-	  console.log(this.tempEditRowData,"test");
+	  console.log(this.selectedRow,"selectedRow");
+	  console.log(this.tempEditRowData,"tempEdit");
 	  console.log(this.isnew,"isnew");
 		
 	  const previousAction = this.selectedRow?.Action;
@@ -631,7 +632,8 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 		        this.totalAmount -= amount;
 		      }
 		    }
-		  
+
+		  console.log(this.totalAmount, "totalAmount");
 		  Object.assign(rowToSave, this.tempEditRowData);
 		  this.dispatchEvent(new CustomEvent("change", {
 		      detail: {
