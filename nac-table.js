@@ -763,7 +763,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	  else {          
             this.selectedRow = item;
           }
-          
+          console.log(this.selectedRow,"tes select")
           this.requestUpdate();
         }}"
                   class="table-row ${this.editMode && this.selectedRow === item ? "edit" : ""} ${this.selectedRow === item ? "selected" : ""}"
