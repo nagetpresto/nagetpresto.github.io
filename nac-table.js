@@ -653,7 +653,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 		  Object.assign(rowToSave, this.tempEditRowData);
 		  this.dispatchEvent(new CustomEvent("change", {
 		   detail: {
-		        collection: JSON.stringify(this.data)
+		        collection: JSON.stringify(this.data) + ";" + this.totalAmount
 		      }
 		}));
 		  this.onChange(this.data);
@@ -933,7 +933,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           Object.assign(editedRow, this.tempEditRowData);
           this.dispatchEvent(new CustomEvent("change", {
             detail: {
-              collection: JSON.stringify(this.data)
+              collection: JSON.stringify(this.data) + ";" + this.totalAmount
             }
           }));
         }
@@ -998,7 +998,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           this.updatePageData();
           this.dispatchEvent(new CustomEvent("change", {
             detail: {
-              collection: JSON.stringify(this.data)
+              collection: JSON.stringify(this.data) + ";" + this.totalAmount
             }
           }));
           this.onChange(this.data);
