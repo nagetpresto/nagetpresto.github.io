@@ -559,11 +559,21 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	    
 
         this.orderMapping = this.colMapping.reduce((acc, curr) => {
-          acc[curr.Title] = {
+          if(this.isnew){
+            acc[curr.Title] = {
               order: parseInt(curr.Order0, 10),
               dataType: curr.DataType,
               displayName: curr.Display_x0020_Name
-          };
+            };
+          }
+          else{
+            acc[curr.Display_x0020_Name] = {
+              order: parseInt(curr.Order0, 10),
+              dataType: curr.DataType,
+              displayName: curr.Display_x0020_Name
+            };
+          }
+          
           return acc;
       }, {});
       //console.log(this.orderMapping, "orderMapping");
@@ -597,7 +607,11 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
                   const mappingKey = Object.keys(this.orderMapping).find(k => k === key);
                   if (mappingKey) {
                       this.formattedValue = formatData(item[key], this.orderMapping[mappingKey].dataType);
-                      this.displayName = this.orderMapping[mappingKey].displayName;
+                      if (this.isnew) {
+                        this.displayName = this.orderMapping[mappingKey].displayName;
+                      } else {
+                          this.displayName = key;
+                      }
                       this.orderedItem[this.displayName] = this.formattedValue;
                   } else {
                       this.orderedItem[key] = item[key];
