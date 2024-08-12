@@ -549,13 +549,13 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	        return {Action: false, ...row };
 	      });
 
-      // const orderMapping = this.colMapping.reduce((acc, curr) => {
-      //     acc[curr.Title] = {
-      //         order: parseInt(curr.Order0, 10),
-      //         dataType: curr.DataType
-      //     };
-      //     return acc;
-      // }, {});
+      this.orderMapping = this.colMapping.reduce((acc, curr) => {
+          acc[curr.Title] = {
+              order: parseInt(curr.Order0, 10),
+              dataType: curr.DataType
+          };
+          return acc;
+      }, {});
       
       // const formatData = (value, dataType) => {
       //     switch (dataType) {
@@ -592,7 +592,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       //     return orderedItem;
       // });
       
-      console.log(this.colMapping, "colMapping");
+      console.log(this.orderMapping, "orderMapping");
       //this.data = this.orderedData;
 
       this.updatePageData();
