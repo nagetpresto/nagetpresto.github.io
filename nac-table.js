@@ -546,7 +546,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	    this.data = this.data.map(row => {
 	        return {Action: false, ...row };
 	      });
-      this.data= this.data.unshift({"TotalAmount":this.TotalAmount});
+      this.data= this.data.unshift({TotalAmount:this.TotalAmount});
 	    console.log(this.isnew,"isnew");
             this.updatePageData();
           } catch (e) {
