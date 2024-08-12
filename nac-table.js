@@ -650,7 +650,8 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 		    }
 
 		  console.log(this.totalAmount, "totalAmount");
-      //console.log("done")
+      document.querySelector('[aria-label="Total Amount"]').value(this.totalAmount)
+      console.log("done")
 		  
 		  Object.assign(rowToSave, this.tempEditRowData);
 		  this.dispatchEvent(new CustomEvent("change", {
