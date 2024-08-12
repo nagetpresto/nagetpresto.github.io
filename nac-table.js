@@ -659,7 +659,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 		}));
 		  this.onChange(this.data);
       console.log(this.data,"this,data");
-      console.log(this.collection,"this.collection")
+      console.log((this.totalAmount +";"+ this.data),"test output")
   	}
 	}
       }
