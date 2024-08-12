@@ -574,7 +574,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           }
       };
       
-      this.orderedData = this.data.map(item => {
+      this.data = this.data.map(item => {
           this.orderedItem = {};
           Object.keys(item)
               .sort((a, b) => {
@@ -592,7 +592,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           return this.orderedItem;
       });
       
-      console.log(this.orderedData, "orderData");
+      //console.log(this.orderedData, "orderData");
       //this.data = this.orderedData;
 
       this.updatePageData();
