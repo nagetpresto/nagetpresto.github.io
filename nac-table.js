@@ -366,7 +366,7 @@ _decorate([e$1("lit-toolbar")], function (_initialize, _LitElement) {
         <button
           class="delete"
           @click="${() => this.dispatchEvent(new CustomEvent("delete-row"))}"
-          ?disabled="${!this.hasSelectedRow}"
+          ?disabled="${true}"
         >
           <svg
             height="18px"
