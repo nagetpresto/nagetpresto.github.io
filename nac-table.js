@@ -581,9 +581,9 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       const formatData = (value, dataType) => {
           switch (dataType) {
               case "2": // integer
-                  return parseInt(value, 10);
+                  return (parseInt(value, 10)||0);
               case "3": // decimal
-                  return parseFloat(value).toFixed(2);
+                  return (parseFloat(value).toFixed(2) || 0 );
               case "4": // date (dd-mm-yyyy)
                   if (value && this.isnew) {
                       const date = new Date(value);
