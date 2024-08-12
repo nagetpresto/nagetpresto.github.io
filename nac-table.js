@@ -550,11 +550,12 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	      });
 
       this.orderMapping = this.colMapping.reduce((acc, curr) => {
-          acc[curr.Title] = {
-              order: parseInt(curr.Order0, 10),
-              dataType: curr.DataType
-          };
-          return acc;
+        acc[curr.Title] = {
+          order: parseInt(curr.Order0, 10),
+          dataType: curr.DataType,
+          displayName: curr.DisplayName
+        };
+        return acc;
       }, {});
       
       const formatData = (value, dataType) => {
@@ -584,7 +585,9 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
               })
               .forEach(key => {
                   if (this.orderMapping[key]) {
-                    this.orderedItem[key] = formatData(item[key], this.orderMapping[key].dataType);
+                    this.formattedValue = formatData(item[key], this.orderMapping[key].dataType);
+                    this.displayName = this.orderMapping[key].displayName;
+                    this.orderedItem[displayName] = formattedValue;
                   } else {
                     this.orderedItem[key] = item[key];
                   }
