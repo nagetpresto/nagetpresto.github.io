@@ -606,11 +606,12 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
               .forEach(key => {
                   const mappingKey = Object.keys(this.orderMapping).find(k => k === key);
                   if (mappingKey) {
-                      this.formattedValue = formatData(item[key], this.orderMapping[mappingKey].dataType);
                       if (this.isnew) {
+                        this.formattedValue = formatData(item[key], this.orderMapping[mappingKey].dataType);
                         this.displayName = this.orderMapping[mappingKey].displayName;
                       } else {
-                          this.displayName = key;
+                        this.formattedValue = item[key]
+                        this.displayName = key;
                       }
                       this.orderedItem[this.displayName] = this.formattedValue;
                   } else {
