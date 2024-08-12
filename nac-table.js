@@ -550,51 +550,49 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	      });
 
       const orderMapping = this.colMapping.reduce((acc, curr) => {
-        acc[curr.Title] = parseInt(curr.Order0, 10);
-        return acc;
+          acc[curr.Title] = {
+              order: parseInt(curr.Order0, 10),
+              dataType: curr.DataType
+          };
+          return acc;
       }, {});
-
+      
       const formatData = (value, dataType) => {
-        switch (dataType) {
-            case 2: // integer
-                return parseInt(value, 10);
-            case 3: // decimal
-              return parseFloat(value).toFixed(2);
-            case 4: // date (dd-mm-yyyy)
-                if (value) {
-                    const date = new Date(value);
-                    return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
-                }
-                return value;
-            default:
-                return value;
-        }
+          switch (dataType) {
+              case "2": // integer
+                  return parseInt(value, 10);
+              case "3": // decimal
+                  return parseFloat(value).toFixed(2);
+              case "4": // date (dd-mm-yyyy)
+                  if (value) {
+                      const date = new Date(value);
+                      return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
+                  }
+                  return value;
+              default:
+                  return value;
+          }
       };
-
-      this.orderedData = this.data.map(item => {
-        const orderedItem = {};
-        Object.keys(item)
-            .sort((a, b) => {
-                const aMapping = this.colMapping.find(map => map.Title.startsWith(a));
-                const bMapping = this.colMapping.find(map => map.Title.startsWith(b));
-                
-                const aOrder = aMapping ? orderMapping[aMapping.Title].order : Infinity;
-                const bOrder = bMapping ? orderMapping[bMapping.Title].order : Infinity;
-                
-                return aOrder - bOrder;
-            })
-            .forEach(key => {
-                const mapping = this.colMapping.find(map => map.Title.startsWith(key));
-                
-                if (mapping) {
-                    orderedItem[key] = formatData(item[key], mapping.DataType);
-                } else {
-                    orderedItem[key] = item[key];
-                }
-            });
-        return orderedItem;
+      
+      const orderedData = this.data.map(item => {
+          const orderedItem = {};
+          Object.keys(item)
+              .sort((a, b) => {
+                  const aOrder = orderMapping[a] ? orderMapping[a].order : Infinity;
+                  const bOrder = orderMapping[b] ? orderMapping[b].order : Infinity;
+                  return aOrder - bOrder;
+              })
+              .forEach(key => {
+                  if (orderMapping[key]) {
+                      orderedItem[key] = formatData(item[key], orderMapping[key].dataType);
+                  } else {
+                      orderedItem[key] = item[key];
+                  }
+              });
+          return orderedItem;
       });
       
+      console.log(this.orderedData, "orderedData");
       this.data = this.orderedData;
 
       this.updatePageData();
