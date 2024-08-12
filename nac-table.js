@@ -835,10 +835,6 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       ${this.onLoad(this.collection)}                    
       ${this.totalPages > 1 ? this.renderPagination() : null}
 
-  //     <div class="total-amount" style="display: flex;justify-content: right;padding: 10px;column-gap: 10px;height: 30px;">
-  //   	<label>Total Amount (IDR): </label>
-	// <input type="text" .value="" class="input-styled" id="totalAmount" readonly="true" style="background: #f7f7f7;">
-  //     </div>
       
     `;
       }
