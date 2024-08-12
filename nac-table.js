@@ -613,7 +613,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	      
         if (this.editCell) {
           const found = this.pageData.find(item => item === this.editCell?.row);
-	  console.log(found,"found");	  
+	        console.log(found,"found");	  
           if (!found) return;
           const editedRow = {
             ...found
@@ -622,18 +622,26 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           this.tempEditRowData = editedRow;
 		
 	  console.log(found,"selectedrow");	
-	  console.log(this.tempEditRowData,"edited");
+	  console.log(this.tempEditRowData,"editedrow");
 	  console.log(this.isnew,"isnew");
 		
 	  const previousAction = found["Action"];
-	  const rowToSave = this.data.find(item => item === found);
+    const rowToSave = this.data.find(item => item === found);
 	  //console.log(rowToSave,"rowToSave")
 	  if (rowToSave) {
 		  const actionChanged = this.tempEditRowData["Action"] !== previousAction;
-    		  const amount = parseFloat(this.tempEditRowData["Amount in document"]) || 0;
+          const currency = found["Currency Key"];
+          const amount = parseFloat(this.tempEditRowData["Amount in document"]) || 0;
+          if (currency === "USD"){
+            amount = this.USD * amount
+          }
+          else if (currency === "JPY"){
+            amount = this.JPY * amount
+          }    		  
 		  
 		  if (actionChanged) {
 		      if (this.tempEditRowData["Action"]) {
+            
 		        this.totalAmount += amount;
 		      } else {
 		        this.totalAmount -= amount;
