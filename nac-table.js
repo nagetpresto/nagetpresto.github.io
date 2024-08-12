@@ -313,7 +313,7 @@ _decorate([e$1("lit-toolbar")], function (_initialize, _LitElement) {
         </button>
         <button
           @click="${() => this.dispatchEvent(new CustomEvent("edit-row"))}"
-          ?disabled="true"
+          ?disabled="${true}"
         >
           <svg
             height="18px"
