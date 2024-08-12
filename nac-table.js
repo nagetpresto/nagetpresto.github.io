@@ -800,7 +800,9 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           <thead>
             <tr>
               ${this.columns.map(column => y`
-                  <th @click="${() => this.onSortClick(column.field)}">
+                  <th style="${(column.label === 'ID' || column.label === 'Header ID' || column.label === "Exchange Rate USD"
+                    || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") && this.isnew 
+                    ? 'display: none;' : ''}" @click="${() => this.onSortClick(column.field)}">
                     ${y`<span class="flex-item">
                       ${column.label}
                       ${this.tableSort.direction === "asc" ? y`<svg
@@ -850,12 +852,13 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           this.requestUpdate();
         }}"
                   class="table-row ${this.editMode && this.selectedRow === item ? "edit" : ""} ${this.selectedRow === item ? "selected" : ""}"
-                >
-		
+                >	
 
    
                   ${this.columns.map((column, columnIndex) => y`
-                      <td>
+                      <td style="${(column.label === 'ID' || column.label === 'Header ID' || column.label === "Exchange Rate USD"
+                          || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") && this.isnew 
+                          ? 'display: none;' : ''}" >
                         ${columnIndex === 0 ? y`<input
                               type="checkbox"
                               .checked="${item[column.field]}"
