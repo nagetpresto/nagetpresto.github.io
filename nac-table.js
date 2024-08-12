@@ -537,7 +537,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       value: function updated(changedProps) {
         if (changedProps.has("collection")) {
           try {
-	    const [isnewString, mappingString, collectionString] = this.collection.split(';');
+	    const [isnewString, mappingString, collectionString] = this.collection.split(';;');
 	    this.isnew = JSON.parse(isnewString);
       console.log(this.isnew,"isnew");
 	    this.totalAmountIDR = 0;
@@ -593,9 +593,10 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       });
       
       console.log(this.orderedData, "orderedData");
-      this.data = this.orderedData;
+      //this.data = this.orderedData;
 
       this.updatePageData();
+
           } catch (e) {
             console.error("Error parsing table data: ", e);
           }
