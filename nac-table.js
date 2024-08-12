@@ -537,7 +537,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       value: function updated(changedProps) {
         if (changedProps.has("collection")) {
           try {
-	    const [isnewString, mappingString, collectionString] = this.collection.split(';;');
+	    const [isnewString, mappingString, collectionString] = this.collection.split(';');
 	    this.isnew = JSON.parse(isnewString);
       console.log(this.isnew,"isnew");
 	    this.totalAmountIDR = 0;
@@ -549,50 +549,50 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	        return {Action: false, ...row };
 	      });
 
-      const orderMapping = this.colMapping.reduce((acc, curr) => {
-          acc[curr.Title] = {
-              order: parseInt(curr.Order0, 10),
-              dataType: curr.DataType
-          };
-          return acc;
-      }, {});
+      // const orderMapping = this.colMapping.reduce((acc, curr) => {
+      //     acc[curr.Title] = {
+      //         order: parseInt(curr.Order0, 10),
+      //         dataType: curr.DataType
+      //     };
+      //     return acc;
+      // }, {});
       
-      const formatData = (value, dataType) => {
-          switch (dataType) {
-              case "2": // integer
-                  return parseInt(value, 10);
-              case "3": // decimal
-                  return parseFloat(value).toFixed(2);
-              case "4": // date (dd-mm-yyyy)
-                  if (value) {
-                      const date = new Date(value);
-                      return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
-                  }
-                  return value;
-              default:
-                  return value;
-          }
-      };
+      // const formatData = (value, dataType) => {
+      //     switch (dataType) {
+      //         case "2": // integer
+      //             return parseInt(value, 10);
+      //         case "3": // decimal
+      //             return parseFloat(value).toFixed(2);
+      //         case "4": // date (dd-mm-yyyy)
+      //             if (value) {
+      //                 const date = new Date(value);
+      //                 return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
+      //             }
+      //             return value;
+      //         default:
+      //             return value;
+      //     }
+      // };
       
-      const orderedData = this.data.map(item => {
-          const orderedItem = {};
-          Object.keys(item)
-              .sort((a, b) => {
-                  const aOrder = orderMapping[a] ? orderMapping[a].order : Infinity;
-                  const bOrder = orderMapping[b] ? orderMapping[b].order : Infinity;
-                  return aOrder - bOrder;
-              })
-              .forEach(key => {
-                  if (orderMapping[key]) {
-                      orderedItem[key] = formatData(item[key], orderMapping[key].dataType);
-                  } else {
-                      orderedItem[key] = item[key];
-                  }
-              });
-          return orderedItem;
-      });
+      // const orderedData = this.data.map(item => {
+      //     const orderedItem = {};
+      //     Object.keys(item)
+      //         .sort((a, b) => {
+      //             const aOrder = orderMapping[a] ? orderMapping[a].order : Infinity;
+      //             const bOrder = orderMapping[b] ? orderMapping[b].order : Infinity;
+      //             return aOrder - bOrder;
+      //         })
+      //         .forEach(key => {
+      //             if (orderMapping[key]) {
+      //                 orderedItem[key] = formatData(item[key], orderMapping[key].dataType);
+      //             } else {
+      //                 orderedItem[key] = item[key];
+      //             }
+      //         });
+      //     return orderedItem;
+      // });
       
-      console.log(this.orderedData, "orderedData");
+      console.log(this.colMapping, "colMapping");
       //this.data = this.orderedData;
 
       this.updatePageData();
