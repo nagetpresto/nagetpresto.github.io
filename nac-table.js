@@ -642,7 +642,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
               this.totalAmountJPY += amount
             }    	
             else{
-              this.totalAmountID += amount
+              this.totalAmountIDR += amount
             }
 		      } else {
 		        if (currency === "USD"){
@@ -652,7 +652,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
               this.totalAmountJPY -= amount
             }    	
             else{
-              this.totalAmountID -= amount
+              this.totalAmountIDR -= amount
             }
 		      }
 		    }
