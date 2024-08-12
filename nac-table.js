@@ -537,6 +537,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       value: function updated(changedProps) {
         if (changedProps.has("collection")) {
           try {
+      console.log(this.collection,"rawJSON")
 	    const [isnewString, mappingString, collectionString] = this.collection.split(';');
 	    this.isnew = JSON.parse(isnewString);
       console.log(this.isnew,"isnew");
