@@ -537,17 +537,16 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       value: function updated(changedProps) {
         if (changedProps.has("collection")) {
           try {
-	    const [isnewString,exrateUSD,exrateJPY, collectionString] = this.collection.split(';');
+	    const [isnewString, collectionString] = this.collection.split(';');
 	    this.isnew = JSON.parse(isnewString);
-	    this.totalAmount = 0;
-	    this.USD = JSON.parse(exrateUSD);
-	    this.JPY = JSON.parse(exrateJPY);
-      this.data = JSON.parse(collectionString);
+	    this.totalAmountIDR = 0;
+      this.totalAmountUSD = 0;
+      this.totalAmountJPY = 0;
+	    this.data = JSON.parse(collectionString);
 	    this.data = this.data.map(row => {
 	        return {Action: false, ...row };
 	      });
-      //this.data= this.data.unshift({TotalAmount:this.TotalAmount,...row});
-	    console.log(this.isnew,"isnew");
+      console.log(this.isnew,"isnew");
             this.updatePageData();
           } catch (e) {
             console.error("Error parsing table data: ", e);
@@ -631,35 +630,40 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	  //console.log(rowToSave,"rowToSave")
 	  if (rowToSave) {
 		  const actionChanged = this.tempEditRowData["Action"] !== previousAction;
-          const currency = found["Currency Key"];
-          const amount = parseFloat(this.tempEditRowData["Amount in document"]) || 0;
-          if (currency === "USD"){
-            amount = this.USD * amount
-          }
-          else if (currency === "JPY"){
-            amount = this.JPY * amount
-          }    		  
+          const amount = parseFloat(this.tempEditRowData["Amount in document"]) || 0;          	  
 		  
 		  if (actionChanged) {
-		      if (this.tempEditRowData["Action"]) {
-            
-		        this.totalAmount += amount;
+		      if (this.tempEditRowData["Action"]) {            
+		        if (currency === "USD"){
+              this.totalAmountUSD += amount
+            }
+            else if (currency === "JPY"){
+              this.totalAmountJPY += amount
+            }    	
+            else{
+              this.totalAmountID += amount
+            }
 		      } else {
-		        this.totalAmount -= amount;
+		        if (currency === "USD"){
+              this.totalAmountUSD -= amount
+            }
+            else if (currency === "JPY"){
+              this.totalAmountJPY -= amount
+            }    	
+            else{
+              this.totalAmountID -= amount
+            }
 		      }
 		    }
 
-		  console.log(this.totalAmount, "totalAmount");
-      document.querySelector('[aria-label="Total Amount"]').value(this.totalAmount)
-      console.log("done")
-		  
+      document.querySelector('[aria-label="Total Amount (IDR)"]').value = this.totalAmountIDR;
+      document.querySelector('[aria-label="Total Amount (USD)"]').value = this.totalAmountUSD;
+      document.querySelector('[aria-label="Total Amount (JPY)"]').value = this.totalAmountJPY;
+      
 		  Object.assign(rowToSave, this.tempEditRowData);
 		  this.dispatchEvent(new CustomEvent("change", {
 		   detail: {
-		        collection: JSON.stringify({
-              totalAmount: this.totalAmount,
-              data: this.data
-            }) 
+            collection: JSON.stringify(this.data)
 		      }
 		}));
 		  this.onChange(this.data);
@@ -831,10 +835,10 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       ${this.onLoad(this.collection)}                    
       ${this.totalPages > 1 ? this.renderPagination() : null}
 
-      <div class="total-amount" style="display: flex;justify-content: right;padding: 10px;column-gap: 10px;height: 30px;">
-    	<label>Total Amount (IDR): </label>
-	<input type="text" .value="${this.totalAmount}" class="input-styled" id="totalAmount" readonly="true" style="background: #f7f7f7;">
-      </div>
+  //     <div class="total-amount" style="display: flex;justify-content: right;padding: 10px;column-gap: 10px;height: 30px;">
+  //   	<label>Total Amount (IDR): </label>
+	// <input type="text" .value="" class="input-styled" id="totalAmount" readonly="true" style="background: #f7f7f7;">
+  //     </div>
       
     `;
       }
@@ -939,10 +943,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           Object.assign(editedRow, this.tempEditRowData);
           this.dispatchEvent(new CustomEvent("change", {
             detail: {
-              collection: JSON.stringify({
-                totalAmount: this.totalAmount,
-                data: this.data
-              }) 
+              collection: JSON.stringify(this.data)
             }
           }));
         }
@@ -1007,10 +1008,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           this.updatePageData();
           this.dispatchEvent(new CustomEvent("change", {
             detail: {
-              collection: JSON.stringify({
-                totalAmount: this.totalAmount,
-                data: this.data
-              }) 
+              collection: JSON.stringify(this.data)
             }
           }));
           this.onChange(this.data);
