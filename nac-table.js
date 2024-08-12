@@ -538,9 +538,13 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
         if (changedProps.has("collection")) {
           try {
       console.log(this.collection,"rawJSON")
-	    const [isnewString, mappingString, collectionString] = this.collection.split(';');
+	    const [isnewString, isapprovalString, isconfirmString, mappingString, collectionString] = this.collection.split(';');
 	    this.isnew = JSON.parse(isnewString);
+      this.isapproval = JSON.parse(isapprovalString);
+      this.isconfirm = JSON.parse(isconfirmString);
       console.log(this.isnew,"isnew");
+      console.log(this.isapproval,"isapproval");
+      console.log(this.isconfirm,"isconfirmation");
 	    this.totalAmountIDR = 0;
       this.totalAmountUSD = 0;
       this.totalAmountJPY = 0;
@@ -677,8 +681,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 		
 	  console.log(found,"selectedrow");	
 	  console.log(this.tempEditRowData,"editedrow");
-	  console.log(this.isnew,"isnew");
-		
+	  
 	  const previousAction = found["Action"];
     const rowToSave = this.data.find(item => item === found);
 	  //console.log(rowToSave,"rowToSave")
@@ -857,8 +860,9 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 
    
                   ${this.columns.map((column, columnIndex) => y`
-                      <td style="${(column.label === 'ID' || column.label === 'Header ID' || column.label === "Exchange Rate USD"
-                          || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") && this.isnew 
+                      <td style="${((column.label === 'ID' || column.label === 'Header ID' || column.label === "Exchange Rate USD"
+                                    || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") && (this.isnew || this.isapproval)) 
+                                    || ((column.label === 'ID' || column.label === 'Header ID') && this.isconfirm)
                           ? 'display: none;' : ''}" >
                         ${columnIndex === 0 ? y`<input
                               type="checkbox"
