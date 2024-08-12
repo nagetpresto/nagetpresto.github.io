@@ -297,7 +297,7 @@ _decorate([e$1("lit-toolbar")], function (_initialize, _LitElement) {
       value: function render() {
         return y`
       <div class="button-wrapper">
-        <button
+        <button disabled=true 
           @click="${() => this.dispatchEvent(new CustomEvent("add-row"))}"
         >
           <svg
