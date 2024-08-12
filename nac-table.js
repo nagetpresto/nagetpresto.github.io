@@ -658,8 +658,11 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 		    }
 
       document.querySelector('[aria-label="Total Amount (IDR)"]').value = this.totalAmountIDR;
+      document.querySelector('[aria-label="Total Amount (IDR)"]').dispatchEvent(new Event('blur'));
       document.querySelector('[aria-label="Total Amount (USD)"]').value = this.totalAmountUSD;
+      document.querySelector('[aria-label="Total Amount (USD)"]').dispatchEvent(new Event('blur'));
       document.querySelector('[aria-label="Total Amount (JPY)"]').value = this.totalAmountJPY;
+      document.querySelector('[aria-label="Total Amount (JPY)"]').dispatchEvent(new Event('blur'));
       
 		  Object.assign(rowToSave, this.tempEditRowData);
 		  this.dispatchEvent(new CustomEvent("change", {
