@@ -550,9 +550,13 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       this.totalAmountJPY = 0;
       this.colMapping = JSON.parse(mappingString);
 	    this.data = JSON.parse(collectionString);
-	    this.data = this.data.map(row => {
+
+      if (this.isnew){
+        this.data = this.data.map(row => {
 	        return {Action: false, ...row };
 	      });
+      }
+	    
 
         this.orderMapping = this.colMapping.reduce((acc, curr) => {
           acc[curr.Title] = {
