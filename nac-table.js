@@ -553,7 +553,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           acc[curr.Title] = {
               order: parseInt(curr.Order0, 10),
               dataType: curr.DataType,
-              displayName: curr.DisplayName
+              displayName: curr.Display_x0020_Name
           };
           return acc;
       }, {});
