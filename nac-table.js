@@ -613,7 +613,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	      
         if (this.editCell) {
           const found = this.pageData.find(item => item === this.editCell?.row);
-	        console.log(found,"found");	  
+	        //console.log(found,"found");	  
           if (!found) return;
           const editedRow = {
             ...found
@@ -649,11 +649,12 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 		    }
 
 		  console.log(this.totalAmount, "totalAmount");
+      console.log("done")
 		  
 		  Object.assign(rowToSave, this.tempEditRowData);
 		  this.dispatchEvent(new CustomEvent("change", {
 		   detail: {
-		        collection: JSON.stringify(this.data) + ";" + this.totalAmount
+		        collection: this.totalAmount + ";" + JSON.stringify(this.data) 
 		      }
 		}));
 		  this.onChange(this.data);
@@ -933,7 +934,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           Object.assign(editedRow, this.tempEditRowData);
           this.dispatchEvent(new CustomEvent("change", {
             detail: {
-              collection: JSON.stringify(this.data) + ";" + this.totalAmount
+              collection: this.totalAmount + ";" + JSON.stringify(this.data) 
             }
           }));
         }
@@ -998,10 +999,11 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           this.updatePageData();
           this.dispatchEvent(new CustomEvent("change", {
             detail: {
-              collection: JSON.stringify(this.data) + ";" + this.totalAmount
+              collection: this.totalAmount + ";" + JSON.stringify(this.data) 
             }
           }));
           this.onChange(this.data);
+        
         }
       }
     }, {
