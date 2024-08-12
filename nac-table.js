@@ -584,9 +584,9 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
               })
               .forEach(key => {
                   if (this.orderMapping[key]) {
-                      orderedItem[key] = formatData(item[key], this.orderMapping[key].dataType);
+                    this.orderedItem[key] = formatData(item[key], this.orderMapping[key].dataType);
                   } else {
-                      orderedItem[key] = item[key];
+                    this.orderedItem[key] = item[key];
                   }
               });
           return this.orderedItem;
