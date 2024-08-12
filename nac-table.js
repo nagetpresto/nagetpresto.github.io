@@ -707,8 +707,10 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
               this.totalAmountIDR -= amount
             }
 		      }
-		    }
-
+		}
+      console.log(this.totalAmountIDR,"IDR")
+      console.log(this.totalAmountUSD,"USD")
+      console.log(this.totalAmountJPY,"JPY")
       document.querySelector('[aria-label="Total Amount (IDR)"]').value = this.totalAmountIDR;
       document.querySelector('[aria-label="Total Amount (IDR)"]').dispatchEvent(new Event('blur'));
       document.querySelector('[aria-label="Total Amount (USD)"]').value = this.totalAmountUSD;
