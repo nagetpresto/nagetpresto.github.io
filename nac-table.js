@@ -542,10 +542,11 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	    this.totalAmount = 0;
 	    this.USD = JSON.parse(exrateUSD);
 	    this.JPY = JSON.parse(exrateJPY);
-            this.data = JSON.parse(collectionString);
+      this.data = JSON.parse(collectionString);
 	    this.data = this.data.map(row => {
 	        return {Action: false, ...row };
 	      });
+      this.data= this.data.unshift({"TotalAmount":this.TotalAmount});
 	    console.log(this.isnew,"isnew");
             this.updatePageData();
           } catch (e) {
