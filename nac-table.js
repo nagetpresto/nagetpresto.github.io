@@ -585,7 +585,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
               case "3": // decimal
                   return parseFloat(value).toFixed(2);
               case "4": // date (dd-mm-yyyy)
-                  if (value) {
+                  if (value && this.isnew) {
                       const date = new Date(value);
                       return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
                   }
