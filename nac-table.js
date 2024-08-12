@@ -630,7 +630,8 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	  //console.log(rowToSave,"rowToSave")
 	  if (rowToSave) {
 		  const actionChanged = this.tempEditRowData["Action"] !== previousAction;
-          const amount = parseFloat(this.tempEditRowData["Amount in document"]) || 0;          	  
+      const currency = found["Currency Key"];   
+      const amount = parseFloat(this.tempEditRowData["Amount in document"]) || 0;          	  
 		  
 		  if (actionChanged) {
 		      if (this.tempEditRowData["Action"]) {            
