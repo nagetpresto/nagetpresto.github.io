@@ -45,14 +45,10 @@ export class RedirectLinkPlugIn extends LitElement {
   }
 
   render() {
-    if (!this.isVisible) {
-        return null;
-      }
-  
-      return html`
+    return html`
         <style>
           .redirect-link {
-            display: inline-flex;
+            display: "${this.isVisible? "inline-flex": "none" }";
             align-items: center;
             color: #007bff;
             text-decoration: none;
