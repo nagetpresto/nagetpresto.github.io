@@ -11,7 +11,7 @@ export class RedirectLinkPlugIn extends LitElement {
   // return a promise for contract changes.
   static getMetaConfig() {
     return {
-      controlName: 'Redirect Link',
+      controlName: 'Redirect Link Button',
       fallbackDisableSubmit: false,
       groupName: 'Custom Controls',
       version: '1.0',
@@ -61,5 +61,5 @@ export class RedirectLinkPlugIn extends LitElement {
 }
 
 // registering the web component
-const elementName = 'redirectlink-plugin';
+const elementName = 'redirectlink-plugin-button';
 customElements.define(elementName, RedirectLinkPlugIn);
