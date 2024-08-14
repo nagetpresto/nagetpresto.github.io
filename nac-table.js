@@ -825,15 +825,14 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           <thead>
             <tr>
               ${this.columns.map(column => y`
-                  <th style="${((
-                                        (column.label === 'ID' || column.label === 'Header ID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
-                                        && (this.isnew || this.isapproval)
-                                      ) 
-                                      || 
-                                      (
-                                        (column.label === 'ID' || column.label === 'Header ID') 
-                                        && this.isconfirm
-                                            ))
+                  <th style="${(
+                                  ((column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'Header ID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
+                                  && (this.isnew || this.isapproval) && (this.issubmission)) 
+                                || 
+                                  ((column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'Header ID') 
+                                  && (this.isnew || this.isapproval) && (this.isconfirm)) 
+                                )
+
                     ? 'display: none;' : ''}" @click="${() => this.onSortClick(column.field)}">
                     ${y`<span class="flex-item">
                       ${column.label}
@@ -888,15 +887,13 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 
    
                   ${this.columns.map((column, columnIndex) => y`
-                      <td style="${((
-                                        (column.label === 'ID' || column.label === 'Header ID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
-                                        && (this.isnew || this.isapproval)
-                                      ) 
-                                      || 
-                                      (
-                                        (column.label === 'ID' || column.label === 'Header ID') 
-                                        && this.isconfirm
-                                            ))
+                      <td style="${(
+                                      ((column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'Header ID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
+                                      && (this.isnew || this.isapproval) && (this.issubmission)) 
+                                    || 
+                                      ((column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'Header ID') 
+                                      && (this.isnew || this.isapproval) && (this.isconfirm)) 
+                                    )
 
                           ? 'display: none;' : ''}" >
                         ${columnIndex === 0 ? y`<input
