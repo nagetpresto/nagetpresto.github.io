@@ -538,13 +538,15 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
         if (changedProps.has("collection")) {
           try {
       console.log(this.collection,"rawJSON")
-	    const [isnewString, isapprovalString, isconfirmString, mappingString, collectionString] = this.collection.split(';');
+	    const [isnewString, isapprovalString, issubmissionString, isconfirmString, mappingString, collectionString] = this.collection.split(';');
 	    this.isnew = JSON.parse(isnewString);
       this.isapproval = JSON.parse(isapprovalString);
       this.isconfirm = JSON.parse(isconfirmString);
+      this.issubmission = JSON.parse(issubmissionString);
       console.log(this.isnew,"isnew");
       console.log(this.isapproval,"isapproval");
       console.log(this.isconfirm,"isconfirmation");
+      console.log(this.issubmission,"issubmission");
 	    this.totalAmountIDR = 0;
       this.totalAmountUSD = 0;
       this.totalAmountJPY = 0;
