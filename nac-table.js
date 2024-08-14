@@ -8,6 +8,25 @@ const baseStyle = i`
   }
 `;
 const NacTableStyles = i`
+.redirect-link {
+  display: inline-flex;
+  align-items: center;
+  color: #007bff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.redirect-link:hover {
+  text-decoration: underline;
+}
+
+.icon-pencil {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
 .table-wrapper {
   border-radius: 4px;
   overflow: auto;
