@@ -827,10 +827,10 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
               ${this.columns.map(column => y`
                   <th style="${(
                                   ((column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'Header ID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
-                                  && (this.isnew || this.isapproval) && (this.issubmission)) 
+                                  && (this.issubmission)) 
                                 || 
                                   ((column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'Header ID') 
-                                  && (this.isnew || this.isapproval) && (this.isconfirm)) 
+                                  && (this.isconfirm)) 
                                 )
 
                     ? 'display: none;' : ''}" @click="${() => this.onSortClick(column.field)}">
