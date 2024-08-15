@@ -601,29 +601,37 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       this.paymentDate = "";
 
       if (this.isconfirm){
-        document.querySelector('[name="_0b35dd58f7464b4ca66eecb1e959625f"]').addEventListener('blur', (event) => {
+        document.querySelector('[name="_0b35dd58f7464b4ca66eecb1e959625f"]').addEventListener('change', (event) => {
           const d = new Date(event.target.value);
-          this.paymentDate = `${d.getDate().toString().padStart(2, '0')}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getFullYear()}`;
+          this.paymentDate = isNaN(d.getTime()) 
+              ? "" 
+              : `${d.getDate().toString().padStart(2, '0')}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getFullYear()}`;
+
+          this.updatePageData();
           console.log(this.paymentDate, "paymentDate");
         });
 
         document.querySelector('[aria-label="Exchange Rate USD (Start)"]').addEventListener('blur', (event) => {
             this.startUSD = parseFloat((event.target.value).toString().replace(/,/g, '')) || 0
+            this.updatePageData();
             console.log(this.startUSD + "," + this.endUSD, "rangeUSD")
         });
 
         document.querySelector('[aria-label="Exchange Rate USD (End)"]').addEventListener('blur', (event) => {
             this.endUSD = parseFloat((event.target.value).toString().replace(/,/g, '')) || 0
+            this.updatePageData();
             console.log(this.startUSD + "," + this.endUSD, "rangeUSD")
         });
 
         document.querySelector('[aria-label="Exchange Rate JPY (Start)"]').addEventListener('blur', (event) => {
             this.startJPY = parseFloat((event.target.value).toString().replace(/,/g, '')) || 0
+            this.updatePageData();
             console.log(this.startJPY + "," + this.endJPY, "rangeJPY")
         });
 
         document.querySelector('[aria-label="Exchange Rate JPY (End)"]').addEventListener('blur', (event) => {
             this.endJPY = parseFloat((event.target.value).toString().replace(/,/g, '')) || 0
+            this.updatePageData();
             console.log(this.startJPY + "," + this.endJPY, "rangeJPY")
         });
 
