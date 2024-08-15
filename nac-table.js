@@ -519,9 +519,25 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 
       function filteredData() {
         return this.data.filter(item => {
-          return Object.values(item).map(val => String(val)).some(val => val.toLowerCase().includes(this.searchText.toLowerCase()));
+          if (this.isconfirm) {
+            const currencyKey = item["Currency Key"]
+            const rateUSD = parseFloat((item["Amount in document currency"]).toString().replace(/,/g, '')) || 0
+            const rateJPY = parseFloat((item["Exchange Rate JPY"]).toString().replace(/,/g, '')) || 0
+
+            if ( (currencyKey == "USD" && this.startUSD !== "" && this.endUSD !== "") && (rateUSD < this.startUSD || rateUSD > this.endUSD) ){
+              return false
+            }
+            else if ((currencyKey == "JPY" && this.startJPY !== "" && this.endJPY !== "") && (rateJPY < this.startJPY || rateJPY > this.endJPY)){
+              return false
+            }
+          }
+          
+          return Object.values(item).map(val => String(val)).some(val => 
+            val.toLowerCase().includes(this.searchText.toLowerCase())
+          );
         });
       }
+      
     }, {
       kind: "get",
       key: "sortedData",
@@ -571,6 +587,35 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       this.totalAmountJPY = 0;
       this.colMapping = JSON.parse(mappingString);
 	    this.data = JSON.parse(collectionString);
+
+      this.startUSD = 0;
+      this.endUSD = 0;
+      this.startJPY = 0;
+      this.endJPY = 0;
+
+
+      if (this.isconfirm){
+        document.querySelector('[aria-label="Exchange Rate USD (Start)"]').addEventListener('blur', (event) => {
+            this.startUSD = parseFloat((event.target.value).toString().replace(/,/g, '')) || 0
+            console.log(this.startUSD + "," + this.endUSD, "rangeUSD")
+        });
+
+        document.querySelector('[aria-label="Exchange Rate USD (End)"]').addEventListener('blur', (event) => {
+            this.endUSD = parseFloat((event.target.value).toString().replace(/,/g, '')) || 0
+            console.log(this.startUSD + "," + this.endUSD, "rangeUSD")
+        });
+
+        document.querySelector('[aria-label="Exchange Rate JPY (Start)"]').addEventListener('blur', (event) => {
+            this.startJPY = parseFloat((event.target.value).toString().replace(/,/g, '')) || 0
+            console.log(this.startJPY + "," + this.endJPY, "rangeJPY")
+        });
+
+        document.querySelector('[aria-label="Exchange Rate JPY (End)"]').addEventListener('blur', (event) => {
+            this.endJPY = parseFloat((event.target.value).toString().replace(/,/g, '')) || 0
+            console.log(this.startJPY + "," + this.endJPY, "rangeJPY")
+        });
+
+      }
 
       if (this.isnew){
         this.data = this.data.map(row => {
@@ -845,10 +890,10 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             <tr>
               ${this.columns.map(column => y`
                   <th style="${(
-                                  ((column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
+                                  ((column.label === "Form Status" ||column.label === "AttachmentLink" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
                                   && (this.issubmission)) 
                                 || 
-                                  ((column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
+                                  ((column.label === "Form Status" ||column.label === "AttachmentLink" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
                                   && (this.isconfirm)) 
                                 )
 
@@ -907,10 +952,10 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
    
                   ${this.columns.map((column, columnIndex) => y`
                       <td style="${(
-                                  ((column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
+                                  ((column.label === "Form Status" ||column.label === "AttachmentLink" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
                                   && (this.issubmission)) 
                                 || 
-                                  ((column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
+                                  ((column.label === "Form Status" ||column.label === "AttachmentLink" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
                                   && (this.isconfirm)) 
                                 )
                           ? 'display: none;' : ''}" >
