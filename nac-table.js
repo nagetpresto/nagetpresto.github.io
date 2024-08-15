@@ -845,10 +845,10 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             <tr>
               ${this.columns.map(column => y`
                   <th style="${(
-                                  ((column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'Header ID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
+                                  ((column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
                                   && (this.issubmission)) 
                                 || 
-                                  ((column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'Header ID') 
+                                  ((column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
                                   && (this.isconfirm)) 
                                 )
 
@@ -907,12 +907,12 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
    
                   ${this.columns.map((column, columnIndex) => y`
                       <td style="${(
-                                      ((column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'Header ID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
-                                      && (this.issubmission)) 
-                                    || 
-                                      ((column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'Header ID') 
-                                      && (this.isconfirm)) 
-                                    )
+                                  ((column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
+                                  && (this.issubmission)) 
+                                || 
+                                  ((column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
+                                  && (this.isconfirm)) 
+                                )
                           ? 'display: none;' : ''}" >
                         ${columnIndex === 0 ? y`<input
                               type="checkbox"
