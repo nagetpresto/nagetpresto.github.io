@@ -525,15 +525,15 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             const rateUSD = parseFloat((item["Exchange Rate USD"]).toString().replace(/,/g, '')) || 0
             const rateJPY = parseFloat((item["Exchange Rate JPY"]).toString().replace(/,/g, '')) || 0
             
-            console.log(this.paymentDate, this.startUSD, this.endUSD, this.startJPY, this.endJPY)
-            console.log(currencyKey, pDate, rateUSD, rateJPY)
+            //console.log(this.paymentDate, this.startUSD, this.endUSD, this.startJPY, this.endJPY)
+            //console.log(currencyKey, pDate, rateUSD, rateJPY)
             if( this.paymentDate !== "" && pDate !== this.paymentDate){
               return false
             }
-            if ( (currencyKey == "IDR" && this.startUSD >0 && this.endUSD >0) && (rateUSD < this.startUSD || rateUSD > this.endUSD) ){
+            if ( (currencyKey == "USD" && this.startUSD > 0 && this.endUSD >=0) && (rateUSD < this.startUSD || rateUSD > this.endUSD) ){
               return false
             }
-            else if ((currencyKey == "JPY" && this.startJPY >0 && this.endJPY >0) && (rateJPY < this.startJPY || rateJPY > this.endJPY)){
+            else if ((currencyKey == "JPY" && this.startJPY >0 && this.endJPY >=0) && (rateJPY < this.startJPY || rateJPY > this.endJPY)){
               return false
             }
           }
