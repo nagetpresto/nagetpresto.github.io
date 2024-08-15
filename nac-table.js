@@ -520,11 +520,16 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       function filteredData() {
         return this.data.filter(item => {
           if (this.isconfirm) {
-            const currencyKey = item["Currency Key"]
+            const currencyKey = item["Currency Key"];
+            const pDate = item["Payment Date"];
+            console.log(currencyKey, pDate)
             const rateUSD = parseFloat((item["Amount in document currency"]).toString().replace(/,/g, '')) || 0
             const rateJPY = parseFloat((item["Exchange Rate JPY"]).toString().replace(/,/g, '')) || 0
-
-            if ( (currencyKey == "USD" && this.startUSD !== "" && this.endUSD !== "") && (rateUSD < this.startUSD || rateUSD > this.endUSD) ){
+            
+            if( this.paymentDate !== "" && pDate !== this.paymentDate){
+              return false
+            }
+            if ( (currencyKey == "IDR" && this.startUSD !== "" && this.endUSD !== "") && (rateUSD < this.startUSD || rateUSD > this.endUSD) ){
               return false
             }
             else if ((currencyKey == "JPY" && this.startJPY !== "" && this.endJPY !== "") && (rateJPY < this.startJPY || rateJPY > this.endJPY)){
