@@ -529,10 +529,10 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             if( this.paymentDate !== "" && pDate !== this.paymentDate){
               return false
             }
-            if ( (currencyKey == "IDR" && this.startUSD !== "" && this.endUSD !== "") && (rateUSD < this.startUSD || rateUSD > this.endUSD) ){
+            if ( (currencyKey == "IDR" && this.startUSD >0 && this.endUSD >0) && (rateUSD < this.startUSD || rateUSD > this.endUSD) ){
               return false
             }
-            else if ((currencyKey == "JPY" && this.startJPY !== "" && this.endJPY !== "") && (rateJPY < this.startJPY || rateJPY > this.endJPY)){
+            else if ((currencyKey == "JPY" && this.startJPY >0 && this.endJPY >0) && (rateJPY < this.startJPY || rateJPY > this.endJPY)){
               return false
             }
           }
