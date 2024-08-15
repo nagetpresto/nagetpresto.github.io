@@ -592,9 +592,15 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       this.endUSD = 0;
       this.startJPY = 0;
       this.endJPY = 0;
-
+      this.paymentDate = "";
 
       if (this.isconfirm){
+        document.querySelector('[name="_0b35dd58f7464b4ca66eecb1e959625f"]').addEventListener('blur', (event) => {
+          const d = new Date(event.target.value);
+          this.paymentDate = `${d.getDate().toString().padStart(2, '0')}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getFullYear()}`;
+          console.log(this.paymentDate, "paymentDate");
+        });
+
         document.querySelector('[aria-label="Exchange Rate USD (Start)"]').addEventListener('blur', (event) => {
             this.startUSD = parseFloat((event.target.value).toString().replace(/,/g, '')) || 0
             console.log(this.startUSD + "," + this.endUSD, "rangeUSD")
