@@ -602,9 +602,9 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       const formatData = (value, dataType) => {
           switch (dataType) {
               case "2": // integer
-                  return (parseInt(value, 10)||0);
+                  return ( (parseInt(value).toString()).replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0);
               case "3": // decimal
-                  return ((parseFloat(value) ||  0)?.toFixed(2));
+                  return ((parseFloat(value) ||0)?.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
               case "4": // date (dd-mm-yyyy)
                   if (value && this.isnew) {
                       const date = new Date(value);
@@ -728,7 +728,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	  if (rowToSave) {
 		  const actionChanged = this.tempEditRowData["Action"] !== previousAction;
       const currency = found["Currency Key"];   
-      const amount = parseFloat(this.tempEditRowData["Amount in document currency"]) || 0;          	  
+      const amount = parseFloat((this.tempEditRowData["Amount in document currency"]).toString().replace(/,/g, '')) || 0
 		  
 		  if (actionChanged) {
 		      if (this.tempEditRowData["Action"]) {            
