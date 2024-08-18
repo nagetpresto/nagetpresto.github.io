@@ -910,10 +910,10 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             <tr>
               ${this.columns.map(column => y`
                   <th style="${(
-                                  ((column.label === "Form Status" ||column.label === "AttachmentLink" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
+                                  ((column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
                                   && (this.issubmission)) 
                                 || 
-                                  ((column.label === "Form Status" ||column.label === "AttachmentLink" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
+                                  ((column.label === "Form Status" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
                                   && (this.isconfirm)) 
                                 )
 
@@ -972,10 +972,10 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
    
                   ${this.columns.map((column, columnIndex) => y`
                       <td style="${(
-                                  ((column.label === "Form Status" ||column.label === "AttachmentLink" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
+                                  ((column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
                                   && (this.issubmission)) 
                                 || 
-                                  ((column.label === "Form Status" ||column.label === "AttachmentLink" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
+                                  ((column.label === "Form Status" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
                                   && (this.isconfirm)) 
                                 )
                           ? 'display: none;' : ''}" >
@@ -1005,7 +1005,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
         }}"
                               ?disabled=${!this.isnew}
                             />` : y`
-                            ${column.label == "History Log" ? 
+                            ${column.label == "History Log" || column.label == "Attachment Link" ? 
                             y`<a href="${item[column.field]}" class="redirect-link" target="_blank">
                                 <svg class="icon-pencil" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                                   <path d="M12.146 0.854a.5.5 0 0 1 .708 0l2.292 2.292a.5.5 0 0 1 0 .708l-8.486 8.486a.5.5 0 0 1-.224.13l-4 1a.5.5 0 0 1-.62-.62l1-4a.5.5 0 0 1 .13-.224l8.486-8.486zM11.207 3l-1.5-1.5L1 10.207V12h1.793L11.207 3z"/>
