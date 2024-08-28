@@ -911,7 +911,10 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
               ${this.columns.map(column => y`
                   <th style="${(
                                   ((column.label === "Payment Date" || column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
-                                  && (this.issubmission)) 
+                                  && (this.issubmission) && (!this.isapproval)) 
+                                || 
+                                 ((column.label !== "Planning Date" || column.label !== "Supplier Name" || column.label !== "Currency Key" || column.label !== "Amount in Document Currency") 
+                                  && (this.issubmission) && (this.isapproval)) 
                                 || 
                                   ((column.label === "Form Status" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
                                   && (this.isconfirm)) 
