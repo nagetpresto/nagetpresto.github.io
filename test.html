@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=500">
+
+    <title>Payment Request</title>
+    <style>
+        @page {
+            size: A4 landscape;
+        }
+        body {
+            font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
+            display: flex;
+            justify-content: center;
+            color: #575C61;
+            max-width: 297mm; 
+            margin: auto;
+        }
+        .content {
+            padding: 10px 20px;
+            box-sizing: border-box;
+        }
+        .header {
+            text-align: center;
+            padding: 10px;
+            color: #575C61;
+            margin-bottom: 20px;
+        }
+        .report-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .input-section {
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            column-gap: 40px;
+        }
+        .input-section-total {
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            column-gap: 40px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 9px;
+        }
+        .input-group input {
+            padding: 6px;
+            width: -webkit-fill-available;
+            border: .75px solid #ccc;
+            border-radius: 5px;
+            font-size: 9px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        table, th, td {
+            border: .75px solid #ccc;
+        }
+        th, td {
+            text-align: center;
+            font-size: 7px;
+            padding: 5px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function() {
+            if (window.matchMedia("print").matches) {
+                document.querySelector("body").style.width = "400mm";
+            }
+        };
+    </script>
+    
+</head>
+<body>
+    <div class="content">
+        <div class="header">
+            <div class="report-title">Payment Request</div>
+        </div>
+
+<div class="input-section">
+            <div class="input-group">
+                <label for="submissionCode">Submission Code</label>
+                <input type="text" id="submissionCode" name="submissionCode" value="{submissioncode}" readonly>
+            </div>
+            <div class="input-group">
+            </div>
+            <div class="input-group">
+            </div>
+            <div class="input-group">
+                <label for="date">Payment Date</label>
+                <input type="text" id="date" name="date" value="29-08-2024" readonly>
+            </div>
+            <div class="input-group">
+                <label for="usdRate">USD Exchange Rate</label>
+                <input type="text" id="usdRate" name="usdRate" value="12,345.0" readonly>
+            </div>
+            <div class="input-group">
+                <label for="jpyRate">JPY Exchange Rate</label>
+                <input type="text" id="jpyRate" name="jpyRate" value="124,356.0" readonly>
+            </div>
+        </div>
+
+<div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Company Code</th>
+                        <th>Document Number of an Accounting Document</th>
+                        <th>Fiscal Year</th>
+                        <th>Document Date in Document</th>
+                        <th>Posting Date in the Document</th>
+                        <th>Fiscal Period</th>
+                        <th>Reference Document Number</th>
+                        <th>Document Header Text</th>
+                        <th>Currency Key</th>
+                        <th>Reference Key</th>
+                        <th>Reverse Indicator</th>
+                        <th>Payment Block</th>
+                        <th>Tax on Sales/Purchases Code</th>
+                        <th>Amount in Document Currency</th>
+                        <th>Debit/Credit Indicator</th>
+                        <th>Item Text</th>
+                        <th>General Ledger Account</th>
+                        <th>Supplier Name</th>
+                        <th>Net Due Date</th>
+                        <th>Purchasing Document Number</th>
+                        <th>Planning Date</th>
+                    </tr>
+                </thead>
+                <tbody style="word-break: break-word;">
+<tr>
+                        <td>1</td>
+                        <td>3000</td>
+                        <td>5100000008</td>
+                        <td>2024.0</td>
+                        <td>02-06-2024</td>
+                        <td>02-06-2024</td>
+                        <td>3.0</td>
+                        <td>TEST3</td>
+                        <td></td>
+                        <td>IDR</td>
+                        <td>51000002502024</td>
+                        <td></td>
+                        <td>B</td>
+                        <td>I1</td>
+                        <td>-8,880,000.0</td>
+                        <td>S</td>
+                        <td>010.001-24.95812347</td>
+                        <td>2121000040</td>
+                        <td>Domestic Vendor 1</td>
+                        <td>02-06-2024</td>
+                        <td>4700000073</td>
+                        <td>02-06-2024</td>
+                    </tr>
+<tr>
+                        <td>2</td>
+                        <td>3000</td>
+                        <td>3200000002</td>
+                        <td>2024.0</td>
+                        <td>25-06-2024</td>
+                        <td>25-06-2024</td>
+                        <td>3.0</td>
+                        <td>TEST7</td>
+                        <td></td>
+                        <td>IDR</td>
+                        <td>32000000022024</td>
+                        <td></td>
+                        <td></td>
+                        <td>I1</td>
+                        <td>-982.0</td>
+                        <td>S</td>
+                        <td>010.001-24.95812310</td>
+                        <td>2121000040</td>
+                        <td>Domestic Vendor 1</td>
+                        <td>25-06-2024</td>
+                        <td></td>
+                        <td>25-06-2024</td>
+                    </tr>
+</tbody>
+            </table>
+        </div>
+<div class="input-section-total">
+            <div class="input-group">
+                <label for="submissionCode">Total Amount (IDR)</label>
+                <input type="text" value="-8,880,982.0" readonly style="background: #f2f2f2;">
+            </div>
+            <div class="input-group">
+                <label for="date">Total Amount (USD)</label>
+                <input type="text" value="0.0" readonly style="background: #f2f2f2;">
+            </div>
+            <div class="input-group">
+                <label for="usdRate">Total Amount (JPY)</label>
+                <input type="text" value="0.0" readonly style="background: #f2f2f2;">
+            </div>
+            <div class="input-group">
+                <label for="jpyRate">Grand Total (IDR)</label>
+                <input type="text" value="-8,880,982.0" readonly style="background: #f2f2f2;">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
