@@ -843,6 +843,22 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       key: "render",
       value: function render() {
         return y`
+        <div style="
+            display: flex;
+            justify-content: flex-start;
+            padding-left: 10px;
+            margin-bottom: 10px;
+        ">
+            <div style="
+            position: relative;
+            padding: 26px;
+        ">
+            <input id="select-all" type="checkbox" class="table-cell-input input-styled" @change="${this.toggleSelectAll}">    
+            </div>
+            <div>
+                <p>Select All</p>
+            </div>
+        </div>
       <div class="top-panel">
         ${this.renderSearch()} ${this.readonly ? null : this.renderToolbar()}
       </div>
@@ -850,7 +866,26 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       ${this.renderTable()}
     `;
       }
-    }, {
+    }, 
+    {
+      kind: "method",
+      key: "toggleSelectAll",
+      value: function toggleSelectAll(event) {
+        const isChecked = event.target.checked;
+    
+        this.data = this.data.map(row => ({
+          ...row,
+          Action: isChecked
+        }));
+    
+        this.dispatchEvent(new CustomEvent("change", {
+          detail: {
+            collection: JSON.stringify(this.data)
+          }
+        }));
+      }
+    },
+    {
       kind: "method",
       key: "renderSearch",
       value: function renderSearch() {
