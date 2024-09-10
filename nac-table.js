@@ -889,6 +889,8 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
               collection: JSON.stringify(this.data)
             }
           }));
+
+          this.requestUpdate();
         });
       }
     },
