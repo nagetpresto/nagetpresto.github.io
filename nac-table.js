@@ -869,28 +869,28 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
     }, 
     {
       kind: "method",
-      key: "onSelectAll",
-      value: function onSelectAll() {
+      key: "firstUpdated",
+      value: function firstUpdated() {
         const selectAllCheckbox = this.shadowRoot.getElementById('select-all');
     
+        // Manually add event listener for the checkbox
         selectAllCheckbox.addEventListener('change', (event) => {
           const isChecked = event.target.checked;
-          const rows = this.shadowRoot.querySelectorAll('.table-cell-input');
           console.log(isChecked,"check all")
-          
-          rows.forEach((checkbox, index) => {
-            // Focus on the checkbox first
-            checkbox.focus();
-      
-            // Trigger the onCellEdit method for each row after focusing
-            this.onCellEdit({
-              field: 'Action',
-              value: isChecked, // Set Action to true if Select All is checked, false if unchecked
-            });
-      
-            // Optionally, blur the checkbox after focusing, to reset focus state
-            checkbox.blur();
-          });
+          // Update "Action" for all rows in the data
+          this.data = this.data.map(row => ({
+            ...row,
+            Action: isChecked
+          }));
+    
+          // Dispatch the change event with the updated data
+          this.dispatchEvent(new CustomEvent("change", {
+            detail: {
+              collection: JSON.stringify(this.data)
+            }
+          }));
+
+          this.requestUpdate();
         });
       }
     },
