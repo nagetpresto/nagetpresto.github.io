@@ -853,7 +853,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             position: relative;
             padding: 26px;
         ">
-            <input id="select-all" type="checkbox" class="table-cell-input input-styled" @change="${this.toggleSelectAll}">    
+            <input id="select-all" type="checkbox" class="table-cell-input input-styled">    
             </div>
             <div>
                 <p>Select All</p>
@@ -869,21 +869,27 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
     }, 
     {
       kind: "method",
-      key: "toggleSelectAll",
-      value: function toggleSelectAll(event) {
-        const isChecked = event.target.checked;
-        console.log(isChecked,"select All")
+      key: "firstUpdated",
+      value: function firstUpdated() {
+        const selectAllCheckbox = this.shadowRoot.getElementById('select-all');
     
-        this.data = this.data.map(row => ({
-          ...row,
-          Action: isChecked
-        }));
+        // Manually add event listener for the checkbox
+        selectAllCheckbox.addEventListener('change', (event) => {
+          const isChecked = event.target.checked;
+          console.log(isChecked,"check all")
+          // Update "Action" for all rows in the data
+          this.data = this.data.map(row => ({
+            ...row,
+            Action: isChecked
+          }));
     
-        this.dispatchEvent(new CustomEvent("change", {
-          detail: {
-            collection: JSON.stringify(this.data)
-          }
-        }));
+          // Dispatch the change event with the updated data
+          this.dispatchEvent(new CustomEvent("change", {
+            detail: {
+              collection: JSON.stringify(this.data)
+            }
+          }));
+        });
       }
     },
     {
