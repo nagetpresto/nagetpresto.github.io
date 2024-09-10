@@ -872,6 +872,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       key: "toggleSelectAll",
       value: function toggleSelectAll(event) {
         const isChecked = event.target.checked;
+        console.log(isChecked,"select All")
     
         this.data = this.data.map(row => ({
           ...row,
