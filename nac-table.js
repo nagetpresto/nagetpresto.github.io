@@ -594,10 +594,10 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       this.colMapping = JSON.parse(mappingString);
 	    this.data = JSON.parse(collectionString);
 
-      this.startUSD = 0;
-      this.endUSD = 0;
-      this.startJPY = 0;
-      this.endJPY = 0;
+      this.startUSD = -1;
+      this.endUSD = -1;
+      this.startJPY = -1;
+      this.endJPY = -1;
       this.paymentDate = "";
 
       if (this.isconfirm){
