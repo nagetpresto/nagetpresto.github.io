@@ -530,12 +530,12 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             if( this.paymentDate !== "" && pDate !== this.paymentDate){
               return false
             }
-            if ( ((this.startUSD > 0 && this.endUSD >=0) && (rateUSD < this.startUSD || rateUSD > this.endUSD)) || ((this.startJPY >0 && this.endJPY >=0) && (rateJPY < this.startJPY || rateJPY > this.endJPY)) ){
+            if ( ((this.startUSD > 0 && this.endUSD >=0) && (rateUSD < this.startUSD || rateUSD > this.endUSD))){
               return false
             }
-            //else if (){
-              //return false
-            //}
+            if (((this.startJPY >0 && this.endJPY >=0) && (rateJPY < this.startJPY || rateJPY > this.endJPY))){
+              return false
+            }
           }
           
           return Object.values(item).map(val => String(val)).some(val => 
