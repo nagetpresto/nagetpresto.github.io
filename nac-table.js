@@ -6,7 +6,7 @@ const baseStyle = i`
     width: 100%;
     display: block;
   }
-`;
+`; 
 const NacTableStyles = i`
 .redirect-link {
   display: inline-flex;
