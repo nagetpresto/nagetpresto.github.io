@@ -522,8 +522,8 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           if (this.isconfirm) {
             const currencyKey = item["Currency Key"];
             const pDate = item["Payment Date"];
-            const rateUSD = parseFloat((item["Exchange Rate USD"]).toString().replace(/,/g, '')) || 0
-            const rateJPY = parseFloat((item["Exchange Rate JPY"]).toString().replace(/,/g, '')) || 0
+            const rateUSD = parseFloat((item["Exchange Rate USD"]).toString().replace(/,/g, '')) //|| 0
+            const rateJPY = parseFloat((item["Exchange Rate JPY"]).toString().replace(/,/g, '')) //|| 0
             
             //console.log(this.paymentDate, this.startUSD, this.endUSD, this.startJPY, this.endJPY)
             //console.log(currencyKey, pDate, rateUSD, rateJPY)
