@@ -853,7 +853,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             position: relative;
             padding: 26px;
         ">
-            <input id="select-all" type="checkbox" class="table-cell-input input-styled">    
+            <input id="select-all" type="checkbox" class="table-cell-input input-styled" ${this.isapproval ? "disabled" : ""}>    
             </div>
             <div>
                 <p>Select All</p>
