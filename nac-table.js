@@ -530,12 +530,13 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             if( this.paymentDate !== "" && pDate !== this.paymentDate){
               return false
             }
-            if ( ((this.startUSD >= 0 && this.endUSD >=0) && (rateUSD < this.startUSD || rateUSD > this.endUSD))){
+            if ( ((this.startUSD >= 0 && this.endUSD >=0) && (rateUSD < this.startUSD || rateUSD > this.endUSD)) ){
               return false
             }
             if (((this.startJPY >= 0 && this.endJPY >=0) && (rateJPY < this.startJPY || rateJPY > this.endJPY))){
               return false
             }
+			
           }
           
           return Object.values(item).map(val => String(val)).some(val => 
@@ -612,25 +613,26 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
         });
 
         document.querySelector('[aria-label="Exchange Rate USD (Start)"]').addEventListener('blur', (event) => {
-            this.startUSD = parseFloat((event.target.value).toString().replace(/,/g, '')) || -1
+            //console.log(event.target.value)
+			this.startUSD = event.target.value == '' ? -1: parseFloat((event.target.value).toString().replace(/,/g, ''))
             this.updatePageData();
             console.log(this.startUSD + "," + this.endUSD, "rangeUSD")
         });
 
         document.querySelector('[aria-label="Exchange Rate USD (End)"]').addEventListener('blur', (event) => {
-            this.endUSD = parseFloat((event.target.value).toString().replace(/,/g, '')) || -1
+            this.endUSD = event.target.value == '' ? -1: parseFloat((event.target.value).toString().replace(/,/g, ''))
             this.updatePageData();
             console.log(this.startUSD + "," + this.endUSD, "rangeUSD")
         });
 
         document.querySelector('[aria-label="Exchange Rate JPY (Start)"]').addEventListener('blur', (event) => {
-            this.startJPY = parseFloat((event.target.value).toString().replace(/,/g, '')) || -1
+            this.startJPY = event.target.value == '' ? -1: parseFloat((event.target.value).toString().replace(/,/g, ''))
             this.updatePageData();
             console.log(this.startJPY + "," + this.endJPY, "rangeJPY")
         });
 
         document.querySelector('[aria-label="Exchange Rate JPY (End)"]').addEventListener('blur', (event) => {
-            this.endJPY = parseFloat((event.target.value).toString().replace(/,/g, '')) || -1
+            this.endJPY = event.target.value == '' ? -1: parseFloat((event.target.value).toString().replace(/,/g, ''))
             this.updatePageData();
             console.log(this.startJPY + "," + this.endJPY, "rangeJPY")
         });
