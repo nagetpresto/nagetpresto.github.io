@@ -850,6 +850,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             justify-content: flex-start;
             padding-left: 10px;
             margin-bottom: 10px;
+            display:none
         ">
             <div style="
             position: relative;
@@ -924,6 +925,8 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
               collection: JSON.stringify(this.data)
             }
           }));
+
+          this.onChange(this.data);
     
           // Request update for UI refresh
           this.requestUpdate();
