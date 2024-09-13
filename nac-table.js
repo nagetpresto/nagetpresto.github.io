@@ -797,6 +797,10 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       const currency = found["Currency Key"];   
       const amount = parseFloat((this.tempEditRowData["Amount in document currency"]).toString().replace(/,/g, '')) || 0
 		  
+      this.totalAmountIDR = document.querySelector('[aria-label="Total Amount (IDR)"]').value
+      this.totalAmountUSD = document.querySelector('[aria-label="Total Amount (USD)"]').value
+      this.totalAmountJPY = document.querySelector('[aria-label="Total Amount (JPY)"]').value
+
 		  if (actionChanged) {
 		      if (this.tempEditRowData["Action"]) {            
 		        if (currency === "USD"){
