@@ -1091,7 +1091,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             this.requestUpdate();
           }
         }}"
-                              ?disabled=${!this.isnew}
+                              ? ""
                             />` : y`
                             ${column.label == "History Log" || column.label == "Attachment Link" ? 
                             y`<a href="${item[column.field]}" class="redirect-link" target="_blank" style=${item[column.field] == ""? "display:none" : ""}>
