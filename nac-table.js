@@ -541,6 +541,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	  else {
 		const PO = item["Purchasing Document Number"] ?? "";
 		const poPrefix = PO.substring(0, 2);
+		console.log(PO, this.category, poPrefix)
 		if (this.category === "Raw Material") {		  
 		  if (!(poPrefix >= '42' && poPrefix <= '46')) {
 		    return false;
@@ -609,7 +610,25 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       this.colMapping = JSON.parse(mappingString);
 	    this.data = JSON.parse(collectionString);
 
-     this.category = document.querySelector('ntx-simple-select-single .ng-value span').textContent;
+      this.category = document.querySelector('ntx-simple-select-single .ng-value span').textContent;
+      const ngSelectElement = document.querySelector('ng-select');
+      let previousValue = '';
+      const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'childList') {
+                    const selectedValueElement = ngSelectElement.querySelector('.ng-value span');
+                    if (selectedValueElement) {
+                        const selectedValue = selectedValueElement.textContent.trim();
+                        if (selectedValue !== previousValue) {
+			    this.category = selectedValue;
+                            console.log('Selection changed:', selectedValue);
+                            previousValue = selectedValue; 
+                        }
+                    }
+                }
+            });
+        });
+	observer.observe(ngSelectElement, { childList: true, subtree: true });
 	console.log(this.category, "category")
 
       this.startUSD = -1;
