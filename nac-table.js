@@ -609,7 +609,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       this.colMapping = JSON.parse(mappingString);
 	    this.data = JSON.parse(collectionString);
 
-     this.category = document.querySelector('[aria-label="Category"]').value;
+     this.category = document.querySelector('ntx-simple-select-single .ng-value span').textContent;
 	console.log(this.category, "category")
 
       this.startUSD = -1;
