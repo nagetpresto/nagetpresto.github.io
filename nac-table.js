@@ -609,17 +609,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       this.totalAmountJPY = 0;
       this.colMapping = JSON.parse(mappingString);
       this.data = JSON.parse(collectionString);
-      this.data.sort((a, b) => {
-	    // Get "Supplier Name" values, default to empty string if undefined
-	    const nameA = (a['Supplier Name'] || '').toUpperCase(); // Convert to uppercase for case-insensitive comparison
-	    const nameB = (b['Supplier Name'] || '').toUpperCase();
-	    
-	    // Compare "Supplier Name" values
-	    if (nameA < nameB) return -1;
-	    if (nameA > nameB) return 1;
-	    return 0;
-	});
-
+     
       this.category = document.querySelector('ntx-simple-select-single .ng-value span').textContent;
       const ngSelectElement = document.querySelector('ng-select');
       let previousValue = '';
@@ -755,6 +745,16 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
               });
           return this.orderedItem;
       });
+ 	this.data.sort((a, b) => {
+	    // Get "Supplier Name" values, default to empty string if undefined
+	    const nameA = (a['Supplier Name'] || '').toUpperCase(); // Convert to uppercase for case-insensitive comparison
+	    const nameB = (b['Supplier Name'] || '').toUpperCase();
+	    
+	    // Compare "Supplier Name" values
+	    if (nameA < nameB) return -1;
+	    if (nameA > nameB) return 1;
+	    return 0;
+	});
       
       console.log(this.data, "processedData");
       
