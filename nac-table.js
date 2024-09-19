@@ -538,6 +538,20 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             }
 			
           }
+	  else {
+		const PO = item["Purchasing Document Number"];
+		const poPrefix = PO.substring(0, 2);
+		if (this.category === "Raw Material") {		  
+		  if (!(poPrefix >= '42' && poPrefix <= '46')) {
+		    return false;
+		  }
+		}
+		else if (this.category === "Non Raw Material") {
+		  if ((poPrefix >= '42' && poPrefix <= '46')) {
+		    return false;
+		  }
+		}
+	  }
           
           return Object.values(item).map(val => String(val)).some(val => 
             val.toLowerCase().includes(this.searchText.toLowerCase())
@@ -594,6 +608,9 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       this.totalAmountJPY = 0;
       this.colMapping = JSON.parse(mappingString);
 	    this.data = JSON.parse(collectionString);
+
+     this.category = document.querySelector('[aria-label="Category"]').value;
+	console.log(this.category, "category")
 
       this.startUSD = -1;
       this.endUSD = -1;
