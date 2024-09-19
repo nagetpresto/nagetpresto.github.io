@@ -541,7 +541,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	  else {
 		const PO = item["Purchasing Document Number"] ?? "";
 		const poPrefix = PO.substring(0, 2);
-		console.log(PO, this.category, poPrefix)
+		//console.log(PO, this.category, poPrefix)
 		if (this.category === "Raw Material") {		  
 		  if (!(poPrefix >= '42' && poPrefix <= '46')) {
 		    return false;
@@ -621,6 +621,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
                         const selectedValue = selectedValueElement.textContent.trim();
                         if (selectedValue !== previousValue) {
 			    this.category = selectedValue;
+			    this.updatePageData();
                             console.log('Selection changed:', selectedValue);
                             previousValue = selectedValue; 
                         }
