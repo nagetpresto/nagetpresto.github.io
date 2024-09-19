@@ -539,7 +539,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 			
           }
 	  else {
-		const PO = item["Purchasing Document Number"];
+		const PO = item["Purchasing Document Number"] ?? "";
 		const poPrefix = PO.substring(0, 2);
 		if (this.category === "Raw Material") {		  
 		  if (!(poPrefix >= '42' && poPrefix <= '46')) {
