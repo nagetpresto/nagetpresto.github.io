@@ -681,6 +681,14 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	        return {Action: false, ...row };
 	      });
       }
+      else {
+        this.data = this.data.map(row => {
+            if (row.hasOwnProperty('Action')) {
+                row.Action = false;
+            }
+            return row;
+        });
+      }
 	    
 
         this.orderMapping = this.colMapping.reduce((acc, curr) => {
