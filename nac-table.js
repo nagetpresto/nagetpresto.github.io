@@ -760,6 +760,8 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	});
       
       console.log(this.data, "processedData");
+
+      this.onChange(this.data);
       
       this.updatePageData();
 
