@@ -682,12 +682,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	      });
       }
       else {
-        this.data = this.data.map(row => {
-            if (row.hasOwnProperty('Action')) {
-                row.Action = false;
-            }
-            return row;
-        });
+        this.shadowRoot.getElementById('select-all').checked = true;
       }
 	    
 
