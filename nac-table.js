@@ -610,27 +610,30 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       this.colMapping = JSON.parse(mappingString);
       this.data = JSON.parse(collectionString);
      
-      this.category = document.querySelector('ntx-simple-select-single .ng-value span').textContent;
+      this.category = document.querySelector('ntx-simple-select-single .ng-value span')?.textContent;
       const ngSelectElement = document.querySelector('ng-select');
-      let previousValue = '';
-      const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.type === 'childList') {
-                    const selectedValueElement = ngSelectElement.querySelector('.ng-value span');
-                    if (selectedValueElement) {
-                        const selectedValue = selectedValueElement.textContent.trim();
-                        if (selectedValue !== previousValue) {
-			    this.category = selectedValue;
-			    this.updatePageData();
-                            console.log('Selection changed:', selectedValue);
-                            previousValue = selectedValue; 
-                        }
-                    }
-                }
-            });
-        });
-	observer.observe(ngSelectElement, { childList: true, subtree: true });
-	console.log(this.category, "category")
+      if (ngSelectElement){
+        let previousValue = '';
+        const observer = new MutationObserver((mutations) => {
+              mutations.forEach((mutation) => {
+                  if (mutation.type === 'childList') {
+                      const selectedValueElement = ngSelectElement.querySelector('.ng-value span');
+                      if (selectedValueElement) {
+                          const selectedValue = selectedValueElement.textContent.trim();
+                          if (selectedValue !== previousValue) {
+            this.category = selectedValue;
+            this.updatePageData();
+                              console.log('Selection changed:', selectedValue);
+                              previousValue = selectedValue; 
+                          }
+                      }
+                  }
+              });
+          });
+        observer.observe(ngSelectElement, { childList: true, subtree: true });
+      }
+      
+      console.log(this.category, "category")
 
       this.startUSD = -1;
       this.endUSD = -1;
