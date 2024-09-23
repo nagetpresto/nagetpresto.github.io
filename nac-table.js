@@ -684,9 +684,9 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	        return {Action: false, ...row };
 	      });
       }
-      else {
-        this.shadowRoot.getElementById('select-all').checked = true;
-      }
+      // else {
+      //   this.shadowRoot.getElementById('select-all').checked = true;
+      // }
 	    
 
         this.orderMapping = this.colMapping.reduce((acc, curr) => {
