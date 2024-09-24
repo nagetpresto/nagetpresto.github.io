@@ -543,12 +543,12 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 		const poPrefix = PO.substring(0, 2);
 		//console.log(PO, this.category, poPrefix)
 		if (this.category === "Raw Material") {		  
-		  if (!(poPrefix >= '42' && poPrefix <= '46')) {
+		  if (!(poPrefix >= '41' && poPrefix <= '46')) {
 		    return false;
 		  }
 		}
 		else if (this.category === "Non Raw Material") {
-		  if ((poPrefix >= '42' && poPrefix <= '46')) {
+		  if ((poPrefix >= '41' && poPrefix <= '46')) {
 		    return false;
 		  }
 		}
@@ -949,7 +949,21 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           this.data = this.data.map(row => {
             const amount = parseFloat((row["Amount in document currency"]).toString().replace(/,/g, '')) || 0;
             const currency = row["Currency Key"];
-    
+            const purchasingDocumentNumber = row["Purchasing Document Number"] ?? "";
+            const docNumberPrefix = purchasingDocumentNumber.substring(0, 2);
+            
+            // Filter based on category if it's "Raw Material"
+            if (this.category === "Raw Material") {
+              if (!(docNumberPrefix >= "41" && docNumberPrefix <= "46")) {
+                return row;
+              }
+            }
+            else{
+              if ((docNumberPrefix >= "41" && docNumberPrefix <= "46")) {
+                return row;
+              }
+            }
+
             // If checked, add the amount to the appropriate currency total
             if (isChecked) {
               if (currency === "USD") {
