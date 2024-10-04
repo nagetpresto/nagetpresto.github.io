@@ -217,12 +217,7 @@ th {
 }
 
 
-@media (max-width: 767px) {
-  th:not(:nth-of-type(1)):not(:nth-of-type(2)):not(:nth-of-type(3)),
-  td:not(:nth-of-type(1)):not(:nth-of-type(2)):not(:nth-of-type(3)) {
-    display: none;
-  }
-}
+
 `;
 const styles = [baseStyle, NacTableStyles];
 
