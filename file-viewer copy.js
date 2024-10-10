@@ -83,7 +83,7 @@ export class FileDownloadPlugin extends LitElement {
   
         return html`
           <div>
-            <a class="redirect-link" download="${fileName}" href="${href}">
+            <a class="redirect-link" target="_blank" download="${fileName}" href="${href}">
                 <svg class="icon-pencil" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                     <path d="M12.146 0.854a.5.5 0 0 1 .708 0l2.292 2.292a.5.5 0 0 1 0 .708l-8.486 8.486a.5.5 0 0 1-.224.13l-4 1a.5.5 0 0 1-.62-.62l1-4a.5.5 0 0 1 .13-.224l8.486-8.486zM11.207 3l-1.5-1.5L1 10.207V12h1.793L11.207 3z"/>
                 </svg>
