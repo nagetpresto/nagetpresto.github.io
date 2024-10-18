@@ -864,7 +864,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 		  const actionChanged = this.tempEditRowData["Action"] !== previousAction;
       const currency = found["Currency Key"];   
       const amount = parseFloat((this.tempEditRowData["Amount in document currency"]).toString().replace(/,/g, '')) || 0
-      const amountLocCurrency = parseFloat((this.tempEditRowData["Amount in local currency"]).toString().replace(/,/g, '')) || 0		  
+      const amountLocCurrency = parseFloat((this.tempEditRowData["Amount in local currency"]?? '0').toString().replace(/,/g, '')) || 0		  
 
       this.grandTotal = parseFloat((document.querySelector('[aria-label="Grand Total (IDR)"]').value).toString().replace(/,/g, '')) || 0;
       this.exchangeJPY = parseFloat((document.querySelector('[aria-label="Exchange Rate JPY"]').value).toString().replace(/,/g, '')) || 0;
@@ -983,7 +983,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           // Update "Action" for all rows in the data
           this.data = this.data.map(row => {
             const amount = parseFloat((row["Amount in document currency"]).toString().replace(/,/g, '')) || 0;
-            const amountLocalCurrency = parseFloat((row["Amount in local currency"]).toString().replace(/,/g, '')) || 0;
+            const amountLocalCurrency = parseFloat((row["Amount in local currency"]?? '0').toString().replace(/,/g, '')) || 0;
             const currency = row["Currency Key"];
             const purchasingDocumentNumber = row["Purchasing Document Number"] ?? "";
             const docNumberPrefix = purchasingDocumentNumber.substring(0, 2);
@@ -1059,7 +1059,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
           }
           
           const amount = parseFloat((row["Amount in document currency"]).toString().replace(/,/g, '')) || 0;
-          const amountLocalCurrency = parseFloat((row["Amount in local currency"]).toString().replace(/,/g, '')) || 0;
+          const amountLocalCurrency = parseFloat((row["Amount in local currency"]?? '0').toString().replace(/,/g, '')) || 0;
           const currency = row["Currency Key"];
           const purchasingDocumentNumber = row["Purchasing Document Number"] ?? "";
           const docNumberPrefix = purchasingDocumentNumber.substring(0, 2);
@@ -1096,17 +1096,17 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
         document.querySelector('[aria-label="Grand Total (IDR)"]').value = this.grandTotal;
         document.querySelector('[aria-label="Grand Total (IDR)"]').dispatchEvent(new Event('blur'));
 
-        // Dispatch the change event with the updated data
-        this.dispatchEvent(new CustomEvent("change", {
-          detail: {
-            collection: JSON.stringify(this.data)
-          }
-        }));
+        // // Dispatch the change event with the updated data
+        // this.dispatchEvent(new CustomEvent("change", {
+        //   detail: {
+        //     collection: JSON.stringify(this.data)
+        //   }
+        // }));
 
-        this.onChange(this.data);
+        // this.onChange(this.data);
   
-        // Request update for UI refresh
-        this.requestUpdate();
+        // // Request update for UI refresh
+        // this.requestUpdate();
       }
     },
     {
