@@ -1158,7 +1158,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
                                   ((column.label === "Payment Date" || column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
                                   && (this.issubmission) && (!this.isapproval)) 
                                 || 
-                                 ((column.label != "Action" &&  column.label != "Planning date" && column.label != "Supplier Name" && column.label != "Currency Key" && column.label != "Amount in document currency" && column.label != "Amount in local currency") 
+                                 ((column.label != "Action" &&  column.label != "Planning date" && column.label != "Supplier Name" && column.label != "Currency Key" && column.label != "Amount in document currency" && column.label != "Amount in Local Currency") 
                                   && (this.issubmission) && (this.isapproval)) 
                                 || 
                                   ((column.label === "Form Status" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
@@ -1223,7 +1223,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
                                   ((column.label === "Payment Date" || column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
                                   && (this.issubmission) && (!this.isapproval)) 
                                 || 
-                                 ((column.label != "Action" &&  column.label != "Planning date" && column.label != "Supplier Name" && column.label != "Currency Key" && column.label != "Amount in document currency" && column.label != "Amount in local currency") 
+                                 ((column.label != "Action" &&  column.label != "Planning date" && column.label != "Supplier Name" && column.label != "Currency Key" && column.label != "Amount in document currency" && column.label != "Amount in Local Currency") 
                                   && (this.issubmission) && (this.isapproval)) 
                                 || 
                                   ((column.label === "Form Status" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
