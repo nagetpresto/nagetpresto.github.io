@@ -1055,7 +1055,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       value: function onchangeExrate() {
         this.grandTotal = 0
         this.data = this.data.map(row => {
-          if (!row.action) {  // Only process rows where action is true
+          if (!(row["Action"])) {  // Only process rows where action is true
             return row;
           }
           
