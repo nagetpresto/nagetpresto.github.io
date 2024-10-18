@@ -876,7 +876,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 
 		  if (actionChanged) {
 		      if (this.tempEditRowData["Action"]) {      
-            if(amountLocCurrency == 0){
+            if(amountLocCurrency > 0){
               this.grandTotal += amountLocCurrency
             }
             else{
@@ -892,7 +892,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             }
 		        
 		      } else {
-		        if(amountLocCurrency == 0){
+		        if(amountLocCurrency > 0){
               this.grandTotal -= amountLocCurrency
             }
             else{
@@ -1002,7 +1002,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 
             // If checked, add the amount to the appropriate currency total
             if (isChecked) {
-              if(amountLocalCurrency == 0){
+              if(amountLocalCurrency > 0){
                 this.grandTotal += amountLocalCurrency
               }
               else{
@@ -1053,6 +1053,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       kind: "method",
       key: "onchangeExrate",
       value: function onchangeExrate() {
+        this.grandTotal = 0
         this.data = this.data.map(row => {
           if (!row.action) {  // Only process rows where action is true
             return row;
@@ -1077,7 +1078,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
     
           // If checked, add the amount to the appropriate currency total
           if (isChecked) {
-            if (amountLocalCurrency === 0) {
+            if (amountLocalCurrency > 0) {
               this.grandTotal += amountLocalCurrency;
             } else {
               if (currency === "USD") {
