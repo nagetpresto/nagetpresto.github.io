@@ -1076,18 +1076,15 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             }
           }
     
-          // If checked, add the amount to the appropriate currency total
-          if (isChecked) {
-            if (amountLocalCurrency > 0) {
-              this.grandTotal += amountLocalCurrency;
+          if (amountLocalCurrency > 0) {
+            this.grandTotal += amountLocalCurrency;
+          } else {
+            if (currency === "USD") {
+              this.grandTotal += (amount * this.exchangeUSD);
+            } else if (currency === "JPY") {
+              this.grandTotal += (amount * this.exchangeJPY);
             } else {
-              if (currency === "USD") {
-                this.grandTotal += (amount * this.exchangeUSD);
-              } else if (currency === "JPY") {
-                this.grandTotal += (amount * this.exchangeJPY);
-              } else {
-                this.grandTotal += amount;
-              }
+              this.grandTotal += amount;
             }
           }
     
@@ -1096,18 +1093,6 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 
         document.querySelector('[aria-label="Grand Total (IDR)"]').value = this.grandTotal;
         document.querySelector('[aria-label="Grand Total (IDR)"]').dispatchEvent(new Event('blur'));
-
-        // // Dispatch the change event with the updated data
-        // this.dispatchEvent(new CustomEvent("change", {
-        //   detail: {
-        //     collection: JSON.stringify(this.data)
-        //   }
-        // }));
-
-        // this.onChange(this.data);
-  
-        // // Request update for UI refresh
-        // this.requestUpdate();
       }
     },
     {
