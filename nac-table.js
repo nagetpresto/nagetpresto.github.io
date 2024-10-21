@@ -871,40 +871,64 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       this.exchangeUSD = parseFloat((document.querySelector('[aria-label="Exchange Rate USD"]').value).toString().replace(/,/g, '')) || 0;
       
       console.log(amountLocCurrency, "local currency")
-      //this.totalAmountIDR = parseFloat((document.querySelector('[aria-label="Total Amount (IDR)"]').value).toString().replace(/,/g, '')) || 0;
-      //this.totalAmountUSD = parseFloat((document.querySelector('[aria-label="Total Amount (USD)"]').value).toString().replace(/,/g, '')) || 0;
-      //this.totalAmountJPY = parseFloat((document.querySelector('[aria-label="Total Amount (JPY)"]').value).toString().replace(/,/g, '')) || 0;
+      this.totalAmountIDR = parseFloat((document.querySelector('[aria-label="Total Amount (IDR)"]').value).toString().replace(/,/g, '')) || 0;
+      this.totalAmountUSD = parseFloat((document.querySelector('[aria-label="Total Amount (USD)"]').value).toString().replace(/,/g, '')) || 0;
+      this.totalAmountJPY = parseFloat((document.querySelector('[aria-label="Total Amount (JPY)"]').value).toString().replace(/,/g, '')) || 0;
 
 		  if (actionChanged) {
 		      if (this.tempEditRowData["Action"]) {      
             if(amountLocCurrency > 0){
               this.grandTotal += amountLocCurrency
+              if (currency === "USD"){
+                this.totalAmountUSD += amount
+              }
+              else if (currency === "JPY"){
+                this.totalAmountJPY += amount
+              }    	
+              else{
+                this.totalAmountIDR += amount
+              }  
             }
             else{
               if (currency === "USD"){
                 this.grandTotal += (amount * this.exchangeUSD)
+                this.totalAmountUSD += amount
               }
               else if (currency === "JPY"){
                 this.grandTotal += (amount * this.exchangeJPY)
+                this.totalAmountJPY += amount
               }    	
               else{
                 this.grandTotal += amount
+                this.totalAmountIDR += amount
               }              
             }
 		        
 		      } else {
 		        if(amountLocCurrency > 0){
               this.grandTotal -= amountLocCurrency
+              if (currency === "USD"){
+                this.totalAmountUSD -= amount
+              }
+              else if (currency === "JPY"){
+                this.totalAmountJPY -= amount
+              }    	
+              else{
+                this.totalAmountIDR -= amount
+              }  
             }
             else{
               if (currency === "USD"){
                 this.grandTotal -= (amount * this.exchangeUSD)
+                this.totalAmountUSD -= amount
               }
               else if (currency === "JPY"){
                 this.grandTotal -= (amount * this.exchangeJPY)
+                this.totalAmountJPY -= amount
               }    	
               else{
                 this.grandTotal -= amount
+                this.totalAmountIDR -= amount
               }              
             }
 		      }
@@ -912,12 +936,12 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       //console.log(this.totalAmountIDR,"IDR")
       //console.log(this.totalAmountUSD,"USD")
       //console.log(this.totalAmountJPY,"JPY")
-      // document.querySelector('[aria-label="Total Amount (IDR)"]').value = this.totalAmountIDR;
-      // document.querySelector('[aria-label="Total Amount (IDR)"]').dispatchEvent(new Event('blur'));
-      // document.querySelector('[aria-label="Total Amount (USD)"]').value = this.totalAmountUSD;
-      // document.querySelector('[aria-label="Total Amount (USD)"]').dispatchEvent(new Event('blur'));
-      // document.querySelector('[aria-label="Total Amount (JPY)"]').value = this.totalAmountJPY;
-      // document.querySelector('[aria-label="Total Amount (JPY)"]').dispatchEvent(new Event('blur'));
+      document.querySelector('[aria-label="Total Amount (IDR)"]').value = this.totalAmountIDR;
+      document.querySelector('[aria-label="Total Amount (IDR)"]').dispatchEvent(new Event('blur'));
+      document.querySelector('[aria-label="Total Amount (USD)"]').value = this.totalAmountUSD;
+      document.querySelector('[aria-label="Total Amount (USD)"]').dispatchEvent(new Event('blur'));
+      document.querySelector('[aria-label="Total Amount (JPY)"]').value = this.totalAmountJPY;
+      document.querySelector('[aria-label="Total Amount (JPY)"]').dispatchEvent(new Event('blur'));
       
       document.querySelector('[aria-label="Grand Total (IDR)"]').value = this.grandTotal;
       document.querySelector('[aria-label="Grand Total (IDR)"]').dispatchEvent(new Event('blur'));
@@ -1005,16 +1029,28 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             if (isChecked) {
               if(amountLocalCurrency > 0){
                 this.grandTotal += amountLocalCurrency
+                if (currency === "USD"){
+                  this.totalAmountUSD += amount
+                }
+                else if (currency === "JPY"){
+                  this.totalAmountJPY += amount
+                }    	
+                else{
+                  this.totalAmountIDR += amount
+                }                  
               }
               else{
                 if (currency === "USD"){
                   this.grandTotal += (amount * this.exchangeUSD)
+                  this.totalAmountUSD += amount
                 }
                 else if (currency === "JPY"){
                   this.grandTotal += (amount * this.exchangeJPY)
+                  this.totalAmountJPY += amount
                 }    	
                 else{
                   this.grandTotal += amount
+                  this.totalAmountIDR += amount
                 }              
               }
             }
@@ -1026,13 +1062,13 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             };
           });
     
-          // Update the UI to show the new total amounts
-          // document.querySelector('[aria-label="Total Amount (IDR)"]').value = this.totalAmountIDR;
-          // document.querySelector('[aria-label="Total Amount (IDR)"]').dispatchEvent(new Event('blur'));
-          // document.querySelector('[aria-label="Total Amount (USD)"]').value = this.totalAmountUSD;
-          // document.querySelector('[aria-label="Total Amount (USD)"]').dispatchEvent(new Event('blur'));
-          // document.querySelector('[aria-label="Total Amount (JPY)"]').value = this.totalAmountJPY;
-          // document.querySelector('[aria-label="Total Amount (JPY)"]').dispatchEvent(new Event('blur'));
+          //Update the UI to show the new total amounts
+          document.querySelector('[aria-label="Total Amount (IDR)"]').value = this.totalAmountIDR;
+          document.querySelector('[aria-label="Total Amount (IDR)"]').dispatchEvent(new Event('blur'));
+          document.querySelector('[aria-label="Total Amount (USD)"]').value = this.totalAmountUSD;
+          document.querySelector('[aria-label="Total Amount (USD)"]').dispatchEvent(new Event('blur'));
+          document.querySelector('[aria-label="Total Amount (JPY)"]').value = this.totalAmountJPY;
+          document.querySelector('[aria-label="Total Amount (JPY)"]').dispatchEvent(new Event('blur'));
           document.querySelector('[aria-label="Grand Total (IDR)"]').value = this.grandTotal;
           document.querySelector('[aria-label="Grand Total (IDR)"]').dispatchEvent(new Event('blur'));
 
@@ -1055,6 +1091,9 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       key: "onchangeExrate",
       value: function onchangeExrate() {
         this.grandTotal = 0
+        this.totalAmountUSD = 0;
+        this.totalAmountJPY = 0;
+        this.totalAmountIDR = 0;
         this.data = this.data.map(row => {
           if (!(row["Action"])) {  // Only process rows where action is true
             return row;
@@ -1079,19 +1118,37 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
     
           if (amountLocalCurrency > 0) {
             this.grandTotal += amountLocalCurrency;
+            if (currency === "USD"){
+              this.totalAmountUSD += amount
+            }
+            else if (currency === "JPY"){
+              this.totalAmountJPY += amount
+            }    	
+            else{
+              this.totalAmountIDR += amount
+            }  
           } else {
             if (currency === "USD") {
               this.grandTotal += (amount * this.exchangeUSD);
+              this.totalAmountUSD += amount
             } else if (currency === "JPY") {
               this.grandTotal += (amount * this.exchangeJPY);
+              this.totalAmountJPY += amount
             } else {
               this.grandTotal += amount;
+              this.totalAmountIDR += amount
             }
           }
     
           return row;
         })
-
+        
+        document.querySelector('[aria-label="Total Amount (IDR)"]').value = this.totalAmountIDR;
+        document.querySelector('[aria-label="Total Amount (IDR)"]').dispatchEvent(new Event('blur'));
+        document.querySelector('[aria-label="Total Amount (USD)"]').value = this.totalAmountUSD;
+        document.querySelector('[aria-label="Total Amount (USD)"]').dispatchEvent(new Event('blur'));
+        document.querySelector('[aria-label="Total Amount (JPY)"]').value = this.totalAmountJPY;
+        document.querySelector('[aria-label="Total Amount (JPY)"]').dispatchEvent(new Event('blur'));
         document.querySelector('[aria-label="Grand Total (IDR)"]').value = this.grandTotal;
         document.querySelector('[aria-label="Grand Total (IDR)"]').dispatchEvent(new Event('blur'));
       }
