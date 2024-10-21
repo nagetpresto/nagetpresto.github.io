@@ -870,6 +870,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       this.exchangeJPY = parseFloat((document.querySelector('[aria-label="Exchange Rate JPY"]').value).toString().replace(/,/g, '')) || 0;
       this.exchangeUSD = parseFloat((document.querySelector('[aria-label="Exchange Rate USD"]').value).toString().replace(/,/g, '')) || 0;
       
+      console.log(amountLocCurrency, "local currency")
       //this.totalAmountIDR = parseFloat((document.querySelector('[aria-label="Total Amount (IDR)"]').value).toString().replace(/,/g, '')) || 0;
       //this.totalAmountUSD = parseFloat((document.querySelector('[aria-label="Total Amount (USD)"]').value).toString().replace(/,/g, '')) || 0;
       //this.totalAmountJPY = parseFloat((document.querySelector('[aria-label="Total Amount (JPY)"]').value).toString().replace(/,/g, '')) || 0;
@@ -1148,7 +1149,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
         const end = start + this.pageSize;
         this.pageData = this.sortedData.slice(start, end);
         return y`
-        
+
 
       <div class="table-wrapper">
         <table>
