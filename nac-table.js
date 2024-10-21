@@ -697,13 +697,18 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	        return {Action: false, ...row };
 	      });
       }
+      if (this.isapproval){
+        this.data = this.data.map(row => {
+	        return {Action: true, ...row };
+	      });
+      }
       // else {
       //   this.shadowRoot.getElementById('select-all').checked = true;
       // }
 	    
 
         this.orderMapping = this.colMapping.reduce((acc, curr) => {
-          if(this.isnew){
+          if(this.isnew || this.isapproval){
             acc[curr.Title] = {
               order: parseInt(curr.Order0, 10),
               dataType: curr.DataType,
@@ -729,7 +734,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
               case "3": // decimal
                   return ((parseFloat(value) ||0)?.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
               case "4": // date (dd-mm-yyyy)
-                  if (value && this.isnew) {
+                  if (value && (this.isnew|| this.isapproval)) {
                       const date = new Date(value);
                       return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
                   }
@@ -750,7 +755,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
               .forEach(key => {
                   const mappingKey = Object.keys(this.orderMapping).find(k => k === key);
                   if (mappingKey) {
-                      if (this.isnew) {
+                      if (this.isnew|| this.isapproval) {
                         this.formattedValue = formatData(item[key], this.orderMapping[mappingKey].dataType);
                         this.displayName = this.orderMapping[mappingKey].displayName;
                       } else {
