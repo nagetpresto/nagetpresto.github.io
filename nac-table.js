@@ -1148,6 +1148,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
         const end = start + this.pageSize;
         this.pageData = this.sortedData.slice(start, end);
         return y`
+        
 
       <div class="table-wrapper">
         <table>
