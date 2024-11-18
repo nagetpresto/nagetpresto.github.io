@@ -619,10 +619,87 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
                       if (selectedValueElement) {
                           const selectedValue = selectedValueElement.textContent.trim();
                           if (selectedValue !== previousValue) {
-            this.category = selectedValue;
-            this.updatePageData();
+                              this.category = selectedValue;
+                              this.updatePageData();
                               console.log('Selection changed:', selectedValue);
                               previousValue = selectedValue; 
+
+                              const isChecked = false;
+                              console.log(isChecked, "check all");
+                        
+                              // Reset the total amounts
+                              this.totalAmountUSD = 0;
+                              this.totalAmountJPY = 0;
+                              this.totalAmountIDR = 0;
+                              this.grandTotal = 0;
+
+                              this.exchangeJPY = parseFloat((document.querySelector('[aria-label="Exchange Rate JPY"]').value).toString().replace(/,/g, '')) || 0;
+                              this.exchangeUSD = parseFloat((document.querySelector('[aria-label="Exchange Rate USD"]').value).toString().replace(/,/g, '')) || 0;
+                        
+                              // Update "Action" for all rows in the data
+                              this.data = this.data.map(row => {
+                                const amount = parseFloat((row["Amount in document currency"]).toString().replace(/,/g, '')) || 0;
+                                const amountLocalCurrency = parseFloat((row["Amount in Local Currency"]?? '0').toString().replace(/,/g, '')) || 0;
+                                const currency = row["Currency Key"];
+                                
+                                // If checked, add the amount to the appropriate currency total
+                                if (isChecked) {
+                                  if(amountLocalCurrency > 0){
+                                    this.grandTotal += amountLocalCurrency
+                                    if (currency === "USD"){
+                                      this.totalAmountUSD += amount
+                                    }
+                                    else if (currency === "JPY"){
+                                      this.totalAmountJPY += amount
+                                    }    	
+                                    else{
+                                      this.totalAmountIDR += amount
+                                    }                  
+                                  }
+                                  else{
+                                    if (currency === "USD"){
+                                      this.grandTotal += (amount * this.exchangeUSD)
+                                      this.totalAmountUSD += amount
+                                    }
+                                    else if (currency === "JPY"){
+                                      this.grandTotal += (amount * this.exchangeJPY)
+                                      this.totalAmountJPY += amount
+                                    }    	
+                                    else{
+                                      this.grandTotal += amount
+                                      this.totalAmountIDR += amount
+                                    }              
+                                  }
+                                }
+                        
+                                // Set the Action field for the row
+                                return {
+                                  ...row,
+                                  Action: isChecked
+                                };
+                              });
+                        
+                              //Update the UI to show the new total amounts
+                              document.querySelector('[aria-label="Total Amount (IDR)"]').value = this.totalAmountIDR;
+                              document.querySelector('[aria-label="Total Amount (IDR)"]').dispatchEvent(new Event('blur'));
+                              document.querySelector('[aria-label="Total Amount (USD)"]').value = this.totalAmountUSD;
+                              document.querySelector('[aria-label="Total Amount (USD)"]').dispatchEvent(new Event('blur'));
+                              document.querySelector('[aria-label="Total Amount (JPY)"]').value = this.totalAmountJPY;
+                              document.querySelector('[aria-label="Total Amount (JPY)"]').dispatchEvent(new Event('blur'));
+                              document.querySelector('[aria-label="Grand Total (IDR)"]').value = this.grandTotal;
+                              document.querySelector('[aria-label="Grand Total (IDR)"]').dispatchEvent(new Event('blur'));
+
+                              // Dispatch the change event with the updated data
+                              this.dispatchEvent(new CustomEvent("change", {
+                                detail: {
+                                  collection: JSON.stringify(this.data)
+                                }
+                              }));
+
+                              this.onChange(this.data);
+                        
+                              // Request update for UI refresh
+                              this.requestUpdate();
                           }
                       }
                   }
@@ -697,6 +774,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 	        return {Action: false, ...row };
 	      });
       }
+      
       if (this.isapproval){
         this.data = this.data.map(row => {
 	        return {Action: true, ...row };

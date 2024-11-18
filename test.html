@@ -214,5 +214,39 @@
             </div>
         </div>
     </div>
-<script type="text/javascript" src="/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&ns=1&cb=1673585566" async></script></body>
+<script type="text/javascript" src="/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&ns=1&cb=1673585566" async></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const table = document.querySelector("table");
+        const tbody = table.querySelector("tbody");
+
+        const supplierNameColumnIndex = 19; 
+        
+        function sortRowsByColumn(index, isAscending = true) {
+            const rowsArray = Array.from(tbody.querySelectorAll("tr"));
+            
+            rowsArray.sort((rowA, rowB) => {
+                const cellA = rowA.cells[index].textContent.trim();
+                const cellB = rowB.cells[index].textContent.trim();
+
+                return isAscending 
+                    ? cellA.localeCompare(cellB) 
+                    : cellB.localeCompare(cellA);
+            });
+
+            rowsArray.forEach((row, index) => {
+                row.cells[0].textContent = index + 1;  
+            });
+
+            rowsArray.forEach(row => tbody.appendChild(row));
+        }
+
+        sortRowsByColumn(supplierNameColumnIndex, true);
+    });
+</script>
+
+
+
+</body>
 </html>
