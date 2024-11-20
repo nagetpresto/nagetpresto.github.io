@@ -769,16 +769,11 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
 
       }
 
-      if (this.isnew) {
-	    this.data = this.data.map(row => {
-		var headerID = parseFloat((row["HeaderID"]).toString().replace(/,/g, '')) || 0;
-		console.log(headerID)
-	        //if (headerID > 0) {
-	        //    return { Action: true, ...row };
-	        //}
-	        return { Action: false, ...row };
-	    });
-	}
+      if (this.isnew){
+        this.data = this.data.map(row => {
+	        return {Action: false, ...row };
+	      });
+      }
 
       
       if (this.isapproval){
