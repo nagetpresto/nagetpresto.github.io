@@ -775,8 +775,8 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       //        return {Action: false, ...row };
       //      });
       //}
-     if (isnew) {
-	    data = data.map(row => {
+     if (this.isnew) {
+	    this.data = this.data.map(row => {
 		var headerID = row["HeaderID"]
 	  	console.log(headerID)
 		if (headerID !== null && headerID !== "" && headerID !== "0") {
