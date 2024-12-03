@@ -1309,7 +1309,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             <tr>
               ${this.columns.map(column => y`
                   <th style="${(
-                                  ((column.label === "Payment Date" || column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
+                                  ((column.label === "Payment Date" || column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log" || column.label === "ListItemID" || column.label === "CreatedBy" || column.label === "CreatedDate" || column.label === "ModifiedBy" || column.label === "ModifiedDate") 
                                   && (this.issubmission) && (!this.isapproval)) 
                                 || 
                                  ((column.label != "Action" &&  column.label != "Planning date" && column.label != "Supplier Name" && column.label != "Currency Key" && column.label != "Amount in document currency" && column.label != "Amount in Local Currency") 
@@ -1374,7 +1374,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
    
                   ${this.columns.map((column, columnIndex) => y`
                       <td style="${(
-                                  ((column.label === "Payment Date" || column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log") 
+                                  ((column.label === "Payment Date" || column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log" || column.label === "ListItemID" || column.label === "CreatedBy" || column.label === "CreatedDate" || column.label === "ModifiedBy" || column.label === "ModifiedDate") 
                                   && (this.issubmission) && (!this.isapproval)) 
                                 || 
                                  ((column.label != "Action" &&  column.label != "Planning date" && column.label != "Supplier Name" && column.label != "Currency Key" && column.label != "Amount in document currency" && column.label != "Amount in Local Currency") 
