@@ -534,21 +534,21 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
             }
 			
           }
-	  else {
-		const PO = item["Purchasing Document Number"] ?? "";
-		const poPrefix = PO.substring(0, 2);
-		//console.log(PO, this.category, poPrefix)
-		if (this.category === "Raw Material") {		  
-		  if (!(poPrefix >= '41' && poPrefix <= '46')) {
-		    return false;
-		  }
-		}
-		else if (this.category === "Non Raw Material") {
-		  if ((poPrefix >= '41' && poPrefix <= '46')) {
-		    return false;
-		  }
-		}
-	  }
+	  // else {
+		// const PO = item["Purchasing Document Number"] ?? "";
+		// const poPrefix = PO.substring(0, 2);
+		// //console.log(PO, this.category, poPrefix)
+		// if (this.category === "Raw Material") {		  
+		//   if (!(poPrefix >= '41' && poPrefix <= '46')) {
+		//     return false;
+		//   }
+		// }
+		// else if (this.category === "Non Raw Material") {
+		//   if ((poPrefix >= '41' && poPrefix <= '46')) {
+		//     return false;
+		//   }
+		// }
+	  // }
           
           return Object.values(item).map(val => String(val)).some(val => 
             val.toLowerCase().includes(this.searchText.toLowerCase())
