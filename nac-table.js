@@ -608,6 +608,8 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       this.exchangeUSD = 0;
       this.colMapping = JSON.parse(mappingString);
       this.data = JSON.parse(collectionString);
+
+      console.log(this.data, "thisdata");
      
       this.category = document.querySelector('ntx-simple-select-single .ng-value span')?.textContent;
       const ngSelectElement = document.querySelector('ng-select');
