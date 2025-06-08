@@ -2,7 +2,7 @@ import { html, css, LitElement } from 'https://cdn.jsdelivr.net/gh/lit/dist@2/al
 
 export class TagSelectInput extends LitElement {
   static properties = {
-    fieldLabel: { type: String }, // 🆕 Ini agar label default NAC muncul
+    label: { type: String },
     linkText: { type: String },
     selectedValues: { type: Array },
     inputValue: { type: String },
@@ -19,7 +19,7 @@ export class TagSelectInput extends LitElement {
       controlName: 'Tag Input Select 2',
       fallbackDisableSubmit: false,
       groupName: 'Custom Controls',
-      version: '1.3',
+      version: '1.2',
       properties: {
         linkText: {
           type: 'string',
@@ -40,23 +40,29 @@ export class TagSelectInput extends LitElement {
           type: 'boolean',
           title: 'Required',
           defaultValue: false
+        },
+        value: {
+          type: 'string',
+          title: 'Selected Values',
+          isValueField: true,
+          defaultValue: '[]'
         }
       },
       standardProperties: {
-        fieldLabel: true, // ✅ Agar label bisa di-set dari designer
+        fieldLabel: true,
         description: true,
         defaultValue: true,
         readOnly: true,
         required: true,
         visibility: true,
-        value: true // ✅ Agar muncul di form variables
+        value: true
       }
     };
   }
 
   constructor() {
     super();
-    this.fieldLabel = '';
+    this.label = '';
     this.linkText = '["Apple","Banana","Cherry"]';
     this.selectedValues = [];
     this.inputValue = '';
@@ -78,15 +84,16 @@ export class TagSelectInput extends LitElement {
   }
 
   syncValueToTags() {
+    let validSelected = [];
     const options = this.parseOptions();
     try {
       const valArr = JSON.parse(this.value);
       if (Array.isArray(valArr)) {
-        this.selectedValues = valArr.filter(v => options.includes(v));
-        this.updateFilteredOptions();
-        this.validate();
+        validSelected = valArr.filter(v => options.includes(v));
       }
     } catch {}
+    this.selectedValues = validSelected;
+    this.validate();
   }
 
   parseOptions() {
@@ -136,11 +143,10 @@ export class TagSelectInput extends LitElement {
 
   updateValue() {
     this.value = JSON.stringify(this.selectedValues);
-    this.dispatchEvent(new CustomEvent('ntx-value-changed', {
+    this.dispatchEvent(new CustomEvent('ntx-value-change', {
       detail: this.value,
       bubbles: true,
-      composed: true,
-      cancelable: false,
+      composed: true
     }));
     this.validate();
   }
@@ -151,6 +157,7 @@ export class TagSelectInput extends LitElement {
 
   render() {
     if (!this.visible) return null;
+    this.updateFilteredOptions();
 
     return html`
       <style>
@@ -236,7 +243,7 @@ export class TagSelectInput extends LitElement {
       </style>
 
       <div class="container">
-        ${this.fieldLabel ? html`<div class="label">${this.fieldLabel}</div>` : ''}
+        ${this.label ? html`<div class="label">${this.label}</div>` : ''}
         <div
           class="tag-container ${this.readOnly ? 'readonly' : ''} ${this.invalid ? 'invalid' : ''}"
           @click=${() => this.shadowRoot.querySelector('input')?.focus()}
