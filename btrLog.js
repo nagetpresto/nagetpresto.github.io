@@ -124,7 +124,7 @@ export class DisplayJsonTableBTR extends LitElement {
                       <td>${row.approver_group ?? ''}</td>
                       <td>${row.approver_company ?? ''}</td>
                       <td>${row.action_name ?? ''}</td>
-                      <td>${row.action_date ? new Date(row.date).toLocaleString() : ''}</td>
+                      <td>${row.action_date ? new Date(row.action_date).toLocaleString() : ''}</td>
                       <td>${row.comment ?? ''}</td>
                       <td>
                         ${row.action_signature
