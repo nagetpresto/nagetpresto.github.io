@@ -128,7 +128,7 @@ export class DisplayJsonTableBTR extends LitElement {
                       <td>${row.comment ?? ''}</td>
                       <td>
                         ${row.action_signature
-                          ? html`<img src="${row.action_signature}" alt="Signature" style="max-height: 100px;" />`
+                          ? html`<img src="${row.action_signature}" alt="Signature" style="max-height: 50px;" />`
                           : ''}
                       </td>
 
