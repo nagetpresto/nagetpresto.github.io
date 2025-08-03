@@ -820,18 +820,19 @@ this.orderMapping = this.colMapping.reduce((acc, curr) => {
       }, {});
       //console.log(this.orderMapping, "orderMapping");
       
-      const formatData = (value, dataType) => {
+      const formatData = (value, dataType, fieldName = "") => {
     switch (dataType) {
         case "2": // integer
-            const cleanedInt = value?.toString().replace(/,/g, '');
-            return (parseInt(cleanedInt || 0).toString()).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        
+            if (fieldName === "ID") {
+                return parseInt(value) || 0; // Tetap integer
+            }
+            return (parseInt(value).toString()).replace(/\B(?=(\d{3})+(?!\d))/g, ",") || "0";
+
         case "3": // decimal
-            const cleanedDec = value?.toString().replace(/,/g, '');
-            return ((parseFloat(cleanedDec) || 0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        
+            return ((parseFloat(value) || 0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
         case "4": // date (dd-mm-yyyy)
-            if (value && (this?.isnew || this?.isapproval)) {
+            if (value && (this.isnew || this.isapproval)) {
                 const date = new Date(value);
                 return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
             }
@@ -841,6 +842,7 @@ this.orderMapping = this.colMapping.reduce((acc, curr) => {
             return value;
     }
 };
+
 
       
       this.data = this.data.map(item => {
