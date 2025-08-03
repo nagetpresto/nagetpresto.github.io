@@ -799,78 +799,66 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       // }
 	    
 
-        this.orderMapping = this.colMapping.reduce((acc, curr) => {
-          if(this.isnew || this.isapproval){
-            acc[curr.Title] = {
-              order: parseInt(curr.Order0, 10),
-              dataType: curr.DataType,
-              displayName: curr.Display_x0020_Name
-            };
-          }
-          else{
-            acc[curr.Display_x0020_Name] = {
-              order: parseInt(curr.Order0, 10),
-              dataType: curr.DataType,
-              displayName: curr.Display_x0020_Name
-            };
-          }
-          
-          return acc;
-      }, {});
-      //console.log(this.orderMapping, "orderMapping");
-      
-      const formatData = (value, dataType) => {
-          switch (dataType) {
-              case "2": // integer
-                  return ( (parseInt(value).toString()).replace(/\B(?=(\d{3})+(?!\d))/g, ",") || 0);
-              case "3": // decimal
-                  return ((parseFloat(value) ||0)?.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-              case "4": // date (dd-mm-yyyy)
-                  if (value && (this.isnew|| this.isapproval)) {
-                      const date = new Date(value);
-                      return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
-                  }
-                  return value;
-              default:
-                  return value;
-          }
-      };
-      
-      this.data = this.data.map(item => {
-          this.orderedItem = {};
-          Object.keys(item)
-              .sort((a, b) => {
-                  const aOrder = this.orderMapping[a] ? this.orderMapping[a].order : Infinity;
-                  const bOrder = this.orderMapping[b] ? this.orderMapping[b].order : Infinity;
-                  return aOrder - bOrder;
-              })
-              .forEach(key => {
-                  const mappingKey = Object.keys(this.orderMapping).find(k => k === key);
-                  if (mappingKey) {
-                      if (this.isnew|| this.isapproval) {
-                        this.formattedValue = formatData(item[key], this.orderMapping[mappingKey].dataType);
-                        this.displayName = this.orderMapping[mappingKey].displayName;
-                      } else {
-                        this.formattedValue = item[key]
-                        this.displayName = key;
-                      }
-                      this.orderedItem[this.displayName] = this.formattedValue;
-                  } else {
-                      this.orderedItem[key] = item[key];
-                  }
-              });
-          return this.orderedItem;
-      });
- 	this.data.sort((a, b) => {
-	    // Get "Supplier Name" values, default to empty string if undefined
-	    const nameA = (a['Supplier Name'] || '').toUpperCase(); // Convert to uppercase for case-insensitive comparison
-	    const nameB = (b['Supplier Name'] || '').toUpperCase();
-	    
-	    // Compare "Supplier Name" values
-	    if (nameA < nameB) return -1;
-	    if (nameA > nameB) return 1;
-	    return 0;
-	});
+        // Membuat orderMapping berdasarkan kondisi
+this.orderMapping = this.colMapping.reduce((acc, curr) => {
+    const key = (this.isnew || this.isapproval) ? curr.Title : curr.Display_x0020_Name;
+    acc[key] = {
+        order: parseInt(curr.Order0, 10),
+        dataType: curr.DataType,
+        displayName: curr.Display_x0020_Name
+    };
+    return acc;
+}, {});
+
+// Fungsi untuk memformat data berdasarkan tipe
+const formatData = (value, dataType) => {
+    switch (dataType) {
+        case "2": // Integer
+            return ((parseInt(value) || 0).toString()).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        case "3": // Decimal
+            return ((parseFloat(value) || 0).toFixed(2)).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        case "4": // Date
+            if (value && (this.isnew || this.isapproval)) {
+                const date = new Date(value);
+                return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
+            }
+            return value;
+        default:
+            return value;
+    }
+};
+
+// Mengubah dan mengurutkan this.data
+this.data = this.data.map(item => {
+    const orderedItem = {};
+    Object.keys(item)
+        .sort((a, b) => {
+            const aOrder = this.orderMapping[a]?.order ?? Infinity;
+            const bOrder = this.orderMapping[b]?.order ?? Infinity;
+            return aOrder - bOrder;
+        })
+        .forEach(key => {
+            const mapping = this.orderMapping[key];
+            if (mapping) {
+                const displayName = mapping.displayName;
+                const formattedValue = (this.isnew || this.isapproval)
+                    ? formatData(item[key], mapping.dataType)
+                    : item[key];
+                orderedItem[displayName] = formattedValue;
+            } else {
+                orderedItem[key] = item[key];
+            }
+        });
+    return orderedItem;
+});
+
+// Mengurutkan berdasarkan "Supplier Name"
+this.data.sort((a, b) => {
+    const nameA = (a['Supplier Name'] || '').toUpperCase();
+    const nameB = (b['Supplier Name'] || '').toUpperCase();
+    return nameA.localeCompare(nameB);
+});
+
       
       console.log(this.data, "processedData");
 
