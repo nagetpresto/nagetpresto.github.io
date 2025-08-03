@@ -809,6 +809,7 @@ this.orderMapping = this.colMapping.reduce((acc, curr) => {
     };
     return acc;
 }, {});
+console.log(this.orderMapping)
 
 // Fungsi untuk memformat data berdasarkan tipe
 const formatData = (value, dataType) => {
