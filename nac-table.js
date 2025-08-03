@@ -857,7 +857,7 @@ this.orderMapping = this.colMapping.reduce((acc, curr) => {
                   const mappingKey = Object.keys(this.orderMapping).find(k => k === key);
                   if (mappingKey) {
                       if (this.isnew|| this.isapproval) {
-                        this.formattedValue = formatData(item[key], this.orderMapping[mappingKey].dataType);
+                        this.formattedValue = formatData(item[key], this.orderMapping[mappingKey].dataType, key);
                         this.displayName = this.orderMapping[mappingKey].displayName;
                       } else {
                         this.formattedValue = item[key]
