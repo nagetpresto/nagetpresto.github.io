@@ -1121,16 +1121,16 @@ this.orderMapping = this.colMapping.reduce((acc, curr) => {
             const docNumberPrefix = purchasingDocumentNumber.substring(0, 2);
             
             // Filter based on category if it's "Raw Material"
-            if (this.category === "Raw Material") {
-              if (!(docNumberPrefix >= "41" && docNumberPrefix <= "46")) {
-                return row;
-              }
-            }
-            else{
-              if ((docNumberPrefix >= "41" && docNumberPrefix <= "46")) {
-                return row;
-              }
-            }
+            // if (this.category === "Raw Material") {
+            //   if (!(docNumberPrefix >= "41" && docNumberPrefix <= "46")) {
+            //     return row;
+            //   }
+            // }
+            // else{
+            //   if ((docNumberPrefix >= "41" && docNumberPrefix <= "46")) {
+            //     return row;
+            //   }
+            // }
 
             // If checked, add the amount to the appropriate currency total
             if (isChecked) {
