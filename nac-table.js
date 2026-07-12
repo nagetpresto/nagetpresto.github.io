@@ -585,6 +585,29 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
         });
       }
     }, {
+      kind: "field",
+      key: "approvalAllowedColumnsNormalized",
+      value() {
+        // Normalized (no spaces/underscores, lowercase) names of the columns
+        // that should stay visible when issubmission + isapproval are both
+        // true. Includes both the "pretty" display names and the raw/camel
+        // field names that show up when colMapping hasn't renamed a field,
+        // so a mismatch in spacing/casing doesn't hide the whole table.
+        return ["action", "planningdate", "suppliername", "currencykey", "currency", "amountindocumentcurrency", "amountinlocalcurrency"];
+      }
+    }, {
+      kind: "method",
+      key: "normalizeColumnLabel",
+      value: function normalizeColumnLabel(label) {
+        return (label || "").toString().replace(/[\s_]+/g, "").toLowerCase();
+      }
+    }, {
+      kind: "method",
+      key: "isHiddenForApproval",
+      value: function isHiddenForApproval(label) {
+        return this.issubmission && this.isapproval && !this.approvalAllowedColumnsNormalized.includes(this.normalizeColumnLabel(label));
+      }
+    }, {
       kind: "method",
       key: "getField",
       value: function getField(row, ...names) {
@@ -1341,8 +1364,7 @@ this.orderMapping = this.colMapping.reduce((acc, curr) => {
                                   ((column.label === "Payment Date" || column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log" || column.label === "ListItemID" || column.label === "CreatedBy" || column.label === "CreatedDate" || column.label === "ModifiedBy" || column.label === "ModifiedDate") 
                                   && (this.issubmission) && (!this.isapproval)) 
                                 || 
-                                 ((column.label != "Action" &&  column.label != "Planning date" && column.label != "Supplier Name" && column.label != "Currency Key" && column.label != "Amount in document currency" && column.label != "Amount in Local Currency") 
-                                  && (this.issubmission) && (this.isapproval)) 
+                                 this.isHiddenForApproval(column.label)
                                 || 
                                   ((column.label === "Form Status" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
                                   && (this.isconfirm)) 
@@ -1406,8 +1428,7 @@ this.orderMapping = this.colMapping.reduce((acc, curr) => {
                                   ((column.label === "Payment Date" || column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log" || column.label === "ListItemID" || column.label === "CreatedBy" || column.label === "CreatedDate" || column.label === "ModifiedBy" || column.label === "ModifiedDate") 
                                   && (this.issubmission) && (!this.isapproval)) 
                                 || 
-                                 ((column.label != "Action" &&  column.label != "Planning date" && column.label != "Supplier Name" && column.label != "Currency Key" && column.label != "Amount in document currency" && column.label != "Amount in Local Currency") 
-                                  && (this.issubmission) && (this.isapproval)) 
+                                 this.isHiddenForApproval(column.label)
                                 || 
                                   ((column.label === "Form Status" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
                                   && (this.isconfirm)) 
