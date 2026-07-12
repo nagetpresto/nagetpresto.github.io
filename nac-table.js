@@ -596,6 +596,22 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
         return ["action", "planningdate", "suppliername", "currencykey", "currency", "amountindocumentcurrency", "amountinlocalcurrency"];
       }
     }, {
+      kind: "field",
+      key: "submissionOnlyHiddenColumnsNormalized",
+      value() {
+        // Columns hidden when issubmission is true and isapproval is false.
+        // "exratejyp" is included as an alias since the raw field for
+        // "Exchange Rate JPY" actually comes back as "ExrateJYP".
+        return ["paymentdate", "formstatus", "attachmentlink", "headeriddisplayname", "id", "headerid", "exchangerateusd", "exchangeratejpy", "exratejyp", "submissioncode", "historylog", "listitemid", "createdby", "createddate", "modifiedby", "modifieddate"];
+      }
+    }, {
+      kind: "field",
+      key: "confirmHiddenColumnsNormalized",
+      value() {
+        // Columns hidden when isconfirm is true.
+        return ["formstatus", "headeriddisplayname", "id", "headerid"];
+      }
+    }, {
       kind: "method",
       key: "normalizeColumnLabel",
       value: function normalizeColumnLabel(label) {
@@ -606,6 +622,24 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       key: "isHiddenForApproval",
       value: function isHiddenForApproval(label) {
         return this.issubmission && this.isapproval && !this.approvalAllowedColumnsNormalized.includes(this.normalizeColumnLabel(label));
+      }
+    }, {
+      kind: "method",
+      key: "isHiddenForSubmissionOnly",
+      value: function isHiddenForSubmissionOnly(label) {
+        return this.issubmission && !this.isapproval && this.submissionOnlyHiddenColumnsNormalized.includes(this.normalizeColumnLabel(label));
+      }
+    }, {
+      kind: "method",
+      key: "isHiddenForConfirm",
+      value: function isHiddenForConfirm(label) {
+        return this.isconfirm && this.confirmHiddenColumnsNormalized.includes(this.normalizeColumnLabel(label));
+      }
+    }, {
+      kind: "method",
+      key: "isColumnHidden",
+      value: function isColumnHidden(label) {
+        return this.isHiddenForSubmissionOnly(label) || this.isHiddenForApproval(label) || this.isHiddenForConfirm(label);
       }
     }, {
       kind: "method",
@@ -1360,17 +1394,7 @@ this.orderMapping = this.colMapping.reduce((acc, curr) => {
           <thead>
             <tr>
               ${this.columns.map(column => y`
-                  <th style="${(
-                                  ((column.label === "Payment Date" || column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log" || column.label === "ListItemID" || column.label === "CreatedBy" || column.label === "CreatedDate" || column.label === "ModifiedBy" || column.label === "ModifiedDate") 
-                                  && (this.issubmission) && (!this.isapproval)) 
-                                || 
-                                 this.isHiddenForApproval(column.label)
-                                || 
-                                  ((column.label === "Form Status" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
-                                  && (this.isconfirm)) 
-                                )
-
-                    ? 'display: none;' : ''}" @click="${() => this.onSortClick(column.field)}">
+                  <th style="${this.isColumnHidden(column.label) ? 'display: none;' : ''}" @click="${() => this.onSortClick(column.field)}">
                     ${y`<span class="flex-item">
                       ${column.label}
                       ${this.tableSort.direction === "asc" ? y`<svg
@@ -1424,16 +1448,7 @@ this.orderMapping = this.colMapping.reduce((acc, curr) => {
 
    
                   ${this.columns.map((column, columnIndex) => y`
-                      <td style="${(
-                                  ((column.label === "Payment Date" || column.label === "Form Status" ||column.label === "Attachment Link" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID' || column.label === "Exchange Rate USD" || column.label === "Exchange Rate JPY" || column.label === "Submission Code" || column.label === "History Log" || column.label === "ListItemID" || column.label === "CreatedBy" || column.label === "CreatedDate" || column.label === "ModifiedBy" || column.label === "ModifiedDate") 
-                                  && (this.issubmission) && (!this.isapproval)) 
-                                || 
-                                 this.isHiddenForApproval(column.label)
-                                || 
-                                  ((column.label === "Form Status" || column.label === "HeaderID_DisplayName" || column.label === 'ID' || column.label === 'HeaderID') 
-                                  && (this.isconfirm)) 
-                                )
-                          ? 'display: none;' : ''}" >
+                      <td style="${this.isColumnHidden(column.label) ? 'display: none;' : ''}" >
                         ${columnIndex === 0 ? y`<input
                               type="checkbox"
                               .checked="${item[column.field]}"
