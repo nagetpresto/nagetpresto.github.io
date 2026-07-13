@@ -602,7 +602,7 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
         // Columns hidden when issubmission is true and isapproval is false.
         // "exratejyp" is included as an alias since the raw field for
         // "Exchange Rate JPY" actually comes back as "ExrateJYP".
-        return ["paymentdate", "formstatus", "attachmentlink", "headeriddisplayname", "id", "headerid", "exchangerateusd", "exchangeratejpy", "exratejyp", "submissioncode", "historylog", "listitemid", "createdby", "createddate", "modifiedby", "modifieddate"];
+        return ["paymentdate", "formstatus", "attachmentlink", "headeriddisplayname", "id", "headerid", "exchangerateusd", "exchangeratejpy", "exratejyp", "submissioncode", "historylog", "listitemid", "createdby", "createddate", "modifiedby", "modifieddate", "approvalloglink"];
       }
     }, {
       kind: "field",
@@ -615,7 +615,11 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       kind: "method",
       key: "normalizeColumnLabel",
       value: function normalizeColumnLabel(label) {
-        return (label || "").toString().replace(/[\s_]+/g, "").toLowerCase();
+        // Strip everything except letters/numbers and lowercase the rest,
+        // so differences in spacing, underscores, parentheses, dashes, etc.
+        // between the hardcoded lists and whatever colMapping produced
+        // don't cause a column to slip through the hide/show check.
+        return (label || "").toString().replace(/[^a-z0-9]/gi, "").toLowerCase();
       }
     }, {
       kind: "method",
@@ -640,6 +644,18 @@ let AndysTable = _decorate([e$1('andys-table')], function (_initialize, _LitElem
       key: "isColumnHidden",
       value: function isColumnHidden(label) {
         return this.isHiddenForSubmissionOnly(label) || this.isHiddenForApproval(label) || this.isHiddenForConfirm(label);
+      }
+    }, {
+      kind: "method",
+      key: "formatAmount",
+      value: function formatAmount(value) {
+        // Formats a number (or numeric string, possibly already comma-separated)
+        // into US-style "1,234,567.89" formatting.
+        const num = parseFloat((value ?? '0').toString().replace(/,/g, '')) || 0;
+        return num.toLocaleString('en-US', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
       }
     }, {
       kind: "method",
@@ -954,6 +970,24 @@ this.orderMapping = this.colMapping.reduce((acc, curr) => {
 	    if (nameA > nameB) return 1;
 	    return 0;
 	});
+
+      // Format the amount columns with US-style comma separators
+      // (1,234,567.89), regardless of isnew/isapproval or whether the
+      // field got renamed via colMapping. Works on whichever key name
+      // is actually present on the row.
+      const amountFieldPairs = [
+        ["Amount in document currency", "AmountinDocumentCurrency"],
+        ["Amount in Local Currency", "AmountinLocalCurrency"]
+      ];
+      this.data = this.data.map(item => {
+        amountFieldPairs.forEach(([displayKey, rawKey]) => {
+          const key = displayKey in item ? displayKey : (rawKey in item ? rawKey : null);
+          if (key && item[key] !== null && item[key] !== undefined && item[key] !== "") {
+            item[key] = this.formatAmount(item[key]);
+          }
+        });
+        return item;
+      });
 
       
       console.log(this.data, "processedData");
